@@ -1,0 +1,189 @@
+/* Mensajería del Caos — landing. Los mismos materiales que el juego: corcho de
+   oficina, notas de papel con cinta, sellos de goma y la cinta transportadora. */
+:root {
+  --corcho: #8B6240;
+  --corcho-oscuro: #6E4B2F;
+  --papel: #FFF6E5;
+  --papel-blanco: #FFFDF8;
+  --papel-sombra: #E8D9BC;
+  --tinta: #2B1D14;
+  --tinta-suave: #6B5544;
+  --sello: #D7263D;
+  --sello-oscuro: #8E1022;
+  --cinta-amarilla: #FFC93C;
+  --azul-tinta: #1F5FAE;
+  --carton: #D49A5E;
+  --display: "Lilita One", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  --maquina: "Special Elite", "Courier New", monospace;
+  --cuerpo: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --suave: cubic-bezier(.22, 1, .36, 1);
+  /* Grano de corcho: puntos claros y oscuros sobre el marrón. */
+  --grano: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .11 0 0 0 0 .08 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--corcho-oscuro); }
+/* clip (no hidden): corta lo que asoman las notas giradas sin romper la barra sticky. */
+html, body { overflow-x: clip; }
+body {
+  margin: 0; color: var(--tinta); font: 500 17px/1.55 var(--cuerpo);
+  background: var(--grano), linear-gradient(#9A6E49, var(--corcho) 30%, var(--corcho-oscuro));
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--cinta-amarilla); outline-offset: 3px; }
+
+/* ── Barra ── */
+.barra {
+  position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px;
+  padding: 8px max(16px, calc((100% - 1080px) / 2));
+  background: color-mix(in srgb, var(--corcho-oscuro) 92%, transparent); border-bottom: 3px solid var(--tinta);
+}
+.marca img { width: 120px; }
+.idiomas { margin-left: auto; display: flex; gap: 4px; }
+.idiomas button {
+  min-width: 44px; min-height: 40px; border: 2px solid var(--tinta); border-radius: 8px; background: var(--papel-sombra);
+  font: 400 15px var(--display); color: var(--tinta-suave); cursor: pointer; transition: translate .08s ease-out;
+}
+.idiomas button[aria-pressed="true"] { background: var(--papel); color: var(--tinta); }
+.idiomas button:active { translate: 0 1px; }
+
+/* ── Botón sello: rojo, con su sombra de goma; se hunde al pulsar ── */
+.boton-sello {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px;
+  border: 2px solid var(--sello-oscuro); border-radius: 12px; background: var(--sello); color: var(--papel);
+  font: 400 22px/1 var(--display); letter-spacing: .02em; text-decoration: none; rotate: -1.5deg;
+  box-shadow: 0 5px 0 var(--sello-oscuro), inset 0 0 0 3px color-mix(in srgb, var(--papel) 35%, transparent);
+  transition: translate .08s ease-out, box-shadow .08s ease-out, rotate .25s var(--suave), filter .12s;
+}
+.boton-sello.pequeno { min-height: 40px; padding: 0 14px; font-size: 16px; rotate: 0deg; box-shadow: 0 3px 0 var(--sello-oscuro); }
+.boton-sello:active { translate: 0 4px; box-shadow: 0 1px 0 var(--sello-oscuro); }
+@media (hover: hover) {
+  /* La nota se despega un poco de la esquina al pasar el ratón. */
+  .boton-sello:hover { rotate: -3.5deg; filter: brightness(1.07); }
+  .boton-sello.pequeno:hover { rotate: -2deg; }
+}
+.boton-secundario {
+  min-height: 48px; padding: 0 20px; border: 2px solid var(--tinta); border-radius: 10px; background: var(--papel);
+  font: 400 18px var(--display); color: var(--tinta); cursor: pointer; box-shadow: 0 3px 0 var(--tinta);
+  transition: translate .08s ease-out, box-shadow .08s ease-out;
+}
+.boton-secundario:active { translate: 0 2px; box-shadow: 0 1px 0 var(--tinta); }
+
+/* ── Secciones ── */
+main > section { width: min(1080px, 100% - 32px); margin: 0 auto; padding: 56px 0; }
+.nota-titulo {
+  display: inline-block; margin: 0 0 24px; padding: 6px 16px; rotate: -2deg; position: relative;
+  background: var(--papel); border: 2px solid var(--tinta); border-radius: 4px;
+  font: 400 clamp(26px, 5vw, 38px)/1.1 var(--display); box-shadow: 0 4px 0 color-mix(in srgb, var(--tinta) 30%, transparent);
+}
+.nota-titulo::before { /* tira de cinta adhesiva sujetando la nota */
+  content: ""; position: absolute; top: -12px; left: 50%; width: 76px; height: 22px; translate: -50% 0; rotate: 4deg;
+  background: color-mix(in srgb, var(--cinta-amarilla) 80%, transparent); border-left: 2px dashed color-mix(in srgb, var(--tinta) 25%, transparent); border-right: 2px dashed color-mix(in srgb, var(--tinta) 25%, transparent);
+}
+
+/* Portada */
+.portada { display: grid; justify-items: center; text-align: center; padding-top: 28px; }
+.escena { display: grid; place-items: center; width: min(980px, 112%); margin-inline: -6%; }
+.escena > * { grid-area: 1 / 1; }
+.escena h1 { margin: 0; width: min(440px, 46%); filter: drop-shadow(0 6px 0 color-mix(in srgb, var(--tinta) 35%, transparent)); }
+.escena-personajes { animation: entra .7s var(--suave) both; }
+.lema {
+  margin: 8px 0 12px; padding: 4px 14px; background: var(--tinta); color: var(--papel); rotate: 1deg;
+  font: 400 clamp(17px, 3.2vw, 22px) var(--maquina);
+}
+.entradilla {
+  max-width: 56ch; margin: 0 0 28px; padding: 16px 20px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 6px;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--tinta) 30%, transparent);
+}
+.detalle { margin: 18px 0 0; font: 14px var(--maquina); color: var(--papel); }
+
+/* Escaparate: la cinta del juego con cajas pasando */
+.escaparate { text-align: center; }
+.cinta {
+  position: relative; overflow: hidden; height: 132px; margin-inline: calc(50% - 50vw); border-block: 4px solid var(--tinta);
+  background: url("assets/img/cinta-banda.webp") 0 0 / auto 100% repeat-x;
+  animation: banda var(--dur-banda, 30s) linear infinite;
+  box-shadow: inset 0 8px 0 color-mix(in srgb, var(--tinta) 40%, transparent), inset 0 -8px 0 color-mix(in srgb, var(--tinta) 40%, transparent);
+}
+.cinta-pista { position: absolute; inset: 0 auto 0 0; display: flex; align-items: center; gap: 28px; padding-left: 28px; width: max-content; animation: pista var(--dur-pista, 40s) linear infinite; }
+@keyframes pista { to { translate: -50% 0; } }
+@keyframes banda { to { background-position-x: calc(-1 * var(--ancho-banda, 2207px)); } }
+.caja {
+  position: relative; flex: none; width: 104px; height: 88px; display: grid; place-items: center;
+  border: 3px solid var(--tinta); border-radius: 8px; background: linear-gradient(var(--carton), #C08A52);
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--tinta) 45%, transparent);
+}
+.caja::before { content: ""; position: absolute; inset: 0 auto 0 50%; width: 18px; translate: -50% 0; background: var(--cinta-caja, #C8443B); opacity: .9; }
+.caja img { position: relative; width: 72px; rotate: -6deg; filter: drop-shadow(0 2px 0 color-mix(in srgb, var(--tinta) 40%, transparent)); }
+.caja:nth-child(3n) { width: 150px; }
+.caja:nth-child(4n + 1) { height: 104px; }
+.pie { max-width: 60ch; margin: 22px auto 0; padding: 10px 16px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 6px; rotate: .5deg; }
+
+/* Cómo se juega */
+.notas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; }
+.nota {
+  position: relative; display: grid; gap: 6px; justify-items: start; padding: 18px 18px 22px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 4px;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--tinta) 30%, transparent); rotate: var(--giro, -1deg); transition: rotate .25s var(--suave), translate .25s var(--suave);
+}
+.nota:nth-child(2) { --giro: 1.2deg; } .nota:nth-child(3) { --giro: -.6deg; } .nota:nth-child(4) { --giro: 1.6deg; background: #FFF0C8; }
+.nota::before { content: ""; position: absolute; top: -9px; left: 50%; width: 18px; height: 18px; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #F05A6B, var(--sello) 55%, var(--sello-oscuro)); border: 2px solid var(--tinta); } /* chincheta */
+.nota img { width: 84px; }
+.nota strong { font: 400 24px var(--display); }
+.nota span { font-size: 15px; color: var(--tinta-suave); }
+@media (hover: hover) { .nota:hover { rotate: 0deg; translate: 0 -3px; } }
+
+/* Sellos */
+.sellos { text-align: center; }
+.hoja {
+  position: relative; height: 300px; max-width: 720px; margin: 0 auto; overflow: hidden; cursor: crosshair; touch-action: manipulation;
+  background: repeating-linear-gradient(var(--papel-blanco) 0 27px, #DCE7F4 27px 28px), var(--papel-blanco);
+  border: 2px solid var(--tinta); border-radius: 4px; box-shadow: 0 6px 0 color-mix(in srgb, var(--tinta) 30%, transparent); rotate: -.8deg;
+}
+.hoja.golpe { animation: golpe .18s ease-out; }
+@keyframes golpe { 40% { translate: 0 3px; scale: .995; } }
+.hoja-texto { position: absolute; inset: auto 0 18px; margin: 0; font: 15px var(--maquina); color: var(--tinta-suave); pointer-events: none; }
+.hoja-sellos img { position: absolute; width: 150px; pointer-events: none; mix-blend-mode: multiply; animation: estampa .3s var(--suave) both; }
+@keyframes estampa { from { scale: 1.7; opacity: 0; } 60% { opacity: 1; } }
+.sello-acciones { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+.sello-cuenta { margin: 0; min-height: 1.5em; padding: 2px 10px; background: var(--tinta); color: var(--papel); font: 15px var(--maquina); }
+.sello-cuenta:empty { display: none; }
+
+/* Capturas */
+.polaroids { display: grid; grid-template-columns: 1fr minmax(160px, 30%); gap: 24px; align-items: center; }
+.polaroid { margin: 0; padding: 12px 12px 8px; background: var(--papel-blanco); border: 2px solid var(--tinta); box-shadow: 0 8px 0 color-mix(in srgb, var(--tinta) 30%, transparent); }
+.polaroid.ancha { rotate: -1.2deg; }
+.polaroid.estrecha { rotate: 2deg; }
+.polaroid figcaption { padding-top: 8px; text-align: center; font: 15px var(--maquina); color: var(--tinta-suave); }
+.chapas { list-style: none; margin: 32px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.chapas li { padding: 6px 12px; border: 2px solid var(--azul-tinta); border-radius: 6px; background: var(--papel); color: var(--azul-tinta); font: 15px var(--maquina); rotate: -1deg; }
+.chapas li:nth-child(even) { rotate: 1.2deg; border-color: var(--sello); color: var(--sello); }
+
+/* Final */
+.final { display: grid; justify-items: center; gap: 16px; text-align: center; }
+.final-jefa { width: 150px; border-radius: 50%; border: 3px solid var(--tinta); background: var(--papel); }
+.final-texto { margin: 0; padding: 8px 16px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 6px; font: 400 clamp(20px, 3.6vw, 28px) var(--display); }
+
+.pie-pagina { padding: 28px 16px 40px; text-align: center; color: var(--papel); font: 14px var(--maquina); background: color-mix(in srgb, var(--tinta) 70%, transparent); }
+.pie-pagina p { margin: 4px 0; }
+
+@keyframes entra { from { opacity: 0; scale: .95; } }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  main > section { padding: 40px 0; }
+  .marca img { width: 96px; }
+  .boton-sello { font-size: 20px; padding: 0 22px; }
+  .escena { width: 118%; margin-inline: -9%; }
+  .escena h1 { width: 52%; }
+  .cinta { height: 108px; }
+  .caja { width: 84px; height: 72px; } .caja img { width: 58px; } .caja:nth-child(3n) { width: 120px; } .caja:nth-child(4n + 1) { height: 86px; }
+  .polaroids { grid-template-columns: 1fr; }
+  .polaroid.estrecha { width: 62%; justify-self: center; }
+  .hoja { height: 240px; }
+  .hoja-sellos img { width: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cinta, .cinta-pista, .escena-personajes, .hoja.golpe, .hoja-sellos img { animation: none; }
+  .boton-sello, .nota { transition: none; }
+}
