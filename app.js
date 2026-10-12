@@ -377,6 +377,8 @@ if (animar) {
 
   // El logo cae como un sello: grande, golpe, temblor y polvo.
   const escena = $("escena");
+  // Ojo: nada de animaciones CSS en estos elementos. gsap.from toma como destino el
+  // estilo calculado, y si una animación CSS va por la mitad, se queda a medias.
   gsap.timeline({ delay: .15 })
     .from(".escena-personajes", { opacity: 0, scale: .9, duration: .6, ease: "power2.out" })
     .from("#logo", { scale: 2.6, rotation: -14, opacity: 0, duration: .32, ease: "power4.in" }, "-=.25")
@@ -398,6 +400,12 @@ if (animar) {
       px(dx * -18); py(dy * -10); lx(dx * 14); ly(dy * 8);
     });
   }
+
+  // Los objetos del tablón se desplazan un poco más despacio que el contenido.
+  gsap.utils.toArray(".deco").forEach((d) => gsap.fromTo(d, { yPercent: 25 }, {
+    yPercent: -25, ease: "none", scrollTrigger: { trigger: d.parentElement, start: "top bottom", end: "bottom top", scrub: true },
+  }));
+
   // Al bajar, los personajes se quedan un poco atrás.
   gsap.to(".escena-personajes", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".portada", start: "top top", end: "bottom top", scrub: true } });
 
