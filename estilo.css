@@ -308,3 +308,20 @@ main > section > :not(.deco, .mancha-cafe) { position: relative; }
   .cinta, .cinta-pista, .hoja.golpe, .hoja-sellos img { animation: none; }
   .boton-sello, .nota, .pieza { transition: none; }
 }
+
+/* ── Privacidad: hojas de papel legibles sobre el corcho ── */
+.idiomas a { min-width: 44px; min-height: 40px; display: grid; place-items: center; border: 2px solid var(--tinta); border-radius: 8px; background: var(--papel); font: 400 15px var(--display); color: var(--tinta); text-decoration: none; }
+.legal { width: min(760px, 100% - 32px); margin: 0 auto; padding: 40px 0 56px; display: grid; gap: 40px; }
+.legal-hoja {
+  scroll-margin-top: 80px; padding: clamp(20px, 5vw, 44px); background: var(--papel-blanco); border: 2px solid var(--tinta); border-radius: 4px;
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--tinta) 30%, transparent); line-height: 1.6;
+}
+.legal-hoja h1 { margin: 0 0 4px; font: 400 clamp(30px, 6vw, 42px)/1.1 var(--display); }
+.legal-hoja h2 { margin: 30px 0 8px; font: 400 23px/1.2 var(--display); }
+.legal-hoja p, .legal-hoja li { max-width: 68ch; }
+.legal-hoja ul { padding-left: 1.2em; }
+.legal-hoja li { margin: 4px 0; }
+.legal-hoja a { color: var(--azul-tinta); }
+.legal-hoja code { font-size: .9em; overflow-wrap: anywhere; }
+.legal-meta { margin: 0 0 20px; font: 14px var(--maquina); color: var(--tinta-suave); }
+.legal-resumen { padding: 12px 16px; background: #FFF0C8; border: 2px dashed var(--tinta-suave); border-radius: 6px; }

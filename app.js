@@ -38,6 +38,7 @@ const TEXTOS = {
     final: "Doña Prisas te espera en la oficina. Llega puntual.",
     "pie.ia": "Ilustraciones y sonidos creados con ayuda de herramientas de IA.",
     "pie.privacidad": "Esta página no usa cookies ni analítica; solo carga fuentes de Google Fonts.",
+    "pie.privacidadEnlace": "Privacidad",
   },
   en: {
     "cta.corto": "Play free", "cta.largo": "Play free on itch.io",
@@ -77,6 +78,7 @@ const TEXTOS = {
     final: "Mrs. Rush is waiting at the office. Don't be late.",
     "pie.ia": "Artwork and sounds made with the help of AI tools.",
     "pie.privacidad": "This page uses no cookies or analytics; it only loads fonts from Google Fonts.",
+    "pie.privacidadEnlace": "Privacy",
   },
 };
 
