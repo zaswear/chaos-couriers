@@ -14,7 +14,12 @@ o con `prefers-reduced-motion`, la página funciona igual sin animaciones: todo 
 anima con `gsap.from`, así que el estado de reposo es el final.
 
 - Español e inglés (`?lang=en`, o el idioma del navegador). Los textos están en `TEXTOS` de `app.js`.
-- La cinta usa la misma banda que el juego y avanza al paso de las cajas.
+- La cinta usa la misma banda que el juego y avanza al paso de las cajas. Las cajas
+  son como en el juego: cartón, cinta teñida de su color y, algunas, el sello de goma
+  de su contenido (`sello-*.webp`); lo especial va suelto con etiqueta (`objeto-*.webp`).
+- Sección del álbum: pegatinas, cajas selladas, sobre del día, edición limitada y
+  objetos perdidos. Si el juego cambia, revisar estos textos y el arte copiado de
+  `apps/sites/chaos-couriers/assets/img/` del monorepo.
 - El sello se estampa al tocar la hoja (con el sonido del juego).
 - **Demo jugable**: mochila de 4×4 y tres cajas. Se arrastran o se tocan (caja y
   luego casilla, que vale también con teclado). Fila o columna llena → se entregan

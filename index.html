@@ -59,7 +59,7 @@
       <div class="cinta" aria-hidden="true">
         <div class="cinta-pista" id="pista"></div>
       </div>
-      <p class="pie" data-t="cinta.pie">Patos, trompetas, yunques, gnomos… y gallinas que ponen huevos dentro de tu mochila.</p>
+      <p class="pie" data-t="cinta.pie">Cajas de cartón con su cinta de color y el sello de lo que llevan… y objetos extraviados sueltos: gallinas, helados, globos.</p>
     </section>
 
     <!-- La demo: una mochila de 4×4 y tres cajas. Llena una fila o columna y se entrega. -->
@@ -79,22 +79,53 @@
     <!-- Cómo se juega: notas de papel clavadas en el corcho. -->
     <section class="como" aria-labelledby="tituloComo">
       <img class="deco deco-cafe" src="assets/img/deco-cafe.webp" alt="" width="256" height="256" loading="lazy">
-      <span class="aro-cafe" aria-hidden="true"></span>
+      <img class="mancha-cafe" src="assets/img/mancha-cafe-1.webp" alt="" width="360" height="360" loading="lazy">
       <h2 id="tituloComo" class="nota-titulo" data-t="como.titulo">Cómo se juega</h2>
       <ol class="notas">
-        <li class="nota"><img src="assets/img/paquete-pato.webp" alt="" width="256" height="256"><strong data-t="como.1t">Arrastra</strong><span data-t="como.1">Coge cada caja de la cinta y suéltala en la mochila. Gírala si no entra.</span></li>
+        <li class="nota"><img src="assets/img/paquete-pato.webp" alt="" width="256" height="256"><strong data-t="como.1t">Arrastra</strong><span data-t="como.1">Coge cada caja de la cinta y suéltala en la mochila. Tócala antes para girarla.</span></li>
         <li class="nota"><img src="assets/img/estrella.webp" alt="" width="256" height="256"><strong data-t="como.2t">Entrega</strong><span data-t="como.2">Una fila o columna llena se entrega y cobras. Varias a la vez: combo.</span></li>
-        <li class="nota"><img src="assets/img/gallina-salta.webp" alt="" width="256" height="256"><strong data-t="como.3t">Sobrevive</strong><span data-t="como.3">Helados que se derriten, jarrones frágiles, imanes, apagones… y una gallina con prisa.</span></li>
+        <li class="nota"><img src="assets/img/gallina-salta.webp" alt="" width="256" height="256"><strong data-t="como.3t">Sobrevive</strong><span data-t="como.3">Objetos extraviados que se mueven, se derriten o explotan, café derramado en la cinta… y una gallina con prisa.</span></li>
         <li class="nota"><img src="assets/img/jefa-enfadada.webp" alt="" width="256" height="256"><strong data-t="como.4t">No la enfades</strong><span data-t="como.4">Cada caja que se cae es una taza de café menos. Sin café, Doña Prisas te despide.</span></li>
       </ol>
+    </section>
+
+    <!-- Álbum: las cajas selladas, el sobre del día y la edición limitada. -->
+    <section class="album" aria-labelledby="tituloAlbum">
+      <h2 id="tituloAlbum" class="nota-titulo" data-t="album.titulo">Llena el álbum</h2>
+      <p class="album-entradilla" data-t="album.entradilla">Algunas cajas llegan con el sello de lo que llevan dentro. Entrégalas y su pegatina va directa a tu álbum.</p>
+      <div class="album-mesa">
+        <div class="album-hoja">
+          <span class="album-rotulo" data-t="album.rotulo">Pegatinas del almacén</span>
+          <ul class="album-pegatinas" aria-hidden="true">
+          <li class="pegatina"><img src="assets/img/paquete-pato.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina"><img src="assets/img/paquete-gnomo.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina"><img src="assets/img/paquete-trompeta.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina"><img src="assets/img/paquete-pecera.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina"><img src="assets/img/paquete-cuco.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina"><img src="assets/img/paquete-tarta.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina"><img src="assets/img/paquete-vikingo.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina hueco" data-t="album.hueco">Por descubrir</li>
+          <li class="pegatina"><img src="assets/img/paquete-yunque.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina"><img src="assets/img/paquete-acordeon.webp" alt="" width="256" height="256" loading="lazy"></li>
+          <li class="pegatina hueco" data-t="album.hueco">Por descubrir</li>
+          <li class="pegatina"><img src="assets/img/paquete-telescopio.webp" alt="" width="256" height="256" loading="lazy"></li>
+          </ul>
+        </div>
+        <ul class="album-notas">
+          <li class="nota"><img src="assets/img/sello-pato.webp" alt="" width="256" height="256" loading="lazy"><strong data-t="album.1t">Cajas selladas</strong><span data-t="album.1">Tres sellos iguales en una línea dan premio.</span></li>
+          <li class="nota"><img src="assets/img/jefa-orgullosa.webp" alt="" width="256" height="256" loading="lazy"><strong data-t="album.2t">Un sobre al día</strong><span data-t="album.2">Al acabar el turno, Doña Prisas te deja una pegatina. Las repetidas se cobran.</span></li>
+          <li class="nota"><img src="assets/img/limitada-pato-vampiro.webp" alt="" width="256" height="256" loading="lazy"><strong data-t="album.3t">Edición limitada</strong><span data-t="album.3">En Halloween y Navidad hay sellos y pegatinas que solo salen esos días.</span></li>
+          <li class="nota"><img src="assets/img/objeto-globo.webp" alt="" width="256" height="256" loading="lazy"><strong data-t="album.4t">Objetos perdidos</strong><span data-t="album.4">Lo extraviado que entregas va a la estantería. A veces su dueño vuelve a por ello.</span></li>
+        </ul>
+      </div>
     </section>
 
     <!-- El sello: se juega con un clic. -->
     <section class="sellos" aria-labelledby="tituloSello">
       <img class="deco deco-borron" src="assets/img/deco-borron.webp" alt="" width="256" height="256" loading="lazy">
-      <h2 id="tituloSello" class="nota-titulo" data-t="sello.titulo">Prueba el sello</h2>
+      <h2 id="tituloSello" class="nota-titulo" data-t="sello.titulo">Prueba los sellos</h2>
       <div class="hoja" id="hoja">
-        <p class="hoja-texto" data-t="sello.instruccion">Toca la hoja para estampar URGENTE.</p>
+        <p class="hoja-texto" data-t="sello.instruccion">Toca la hoja: URGENTE y los sellos de goma de las cajas.</p>
         <div class="hoja-sellos" id="hojaSellos" aria-hidden="true"></div>
       </div>
       <div class="sello-acciones">
@@ -115,12 +146,14 @@
         <li data-t="chapa.reto">Reto diario: las mismas cajas para todos</li>
         <li data-t="chapa.semanas">Tres semanas de mercancía nueva</li>
         <li data-t="chapa.minijuegos">Minijuegos de paquetes urgentes</li>
+        <li data-t="chapa.tienda">Tienda con mejoras y mochilas para elegir</li>
+        <li data-t="chapa.relajado">Modo relajado: sin perder tazas</li>
         <li data-t="chapa.idiomas">Español, inglés, portugués y chino</li>
       </ul>
     </section>
 
     <section class="final">
-      <span class="aro-cafe" aria-hidden="true"></span>
+      <img class="mancha-cafe" src="assets/img/mancha-cafe-2.webp" alt="" width="360" height="360" loading="lazy">
       <div class="final-escena">
         <img class="final-jefa" src="assets/img/jefa-orgullosa.webp" alt="" width="256" height="256" loading="lazy">
         <img class="final-taza" src="assets/img/taza-nerviosa.webp" alt="" width="256" height="256" loading="lazy">

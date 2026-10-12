@@ -6,7 +6,7 @@ const TEXTOS = {
     entradilla: "Eres el repartidor nuevo. Los paquetes llegan por la cinta y tú los metes en la mochila antes de que se caigan. Ninguno es normal.",
     detalle: "En el navegador · móvil y escritorio · sin descargas",
     "cinta.titulo": "Hoy en la cinta",
-    "cinta.pie": "Patos, trompetas, yunques, gnomos… y gallinas que ponen huevos dentro de tu mochila.",
+    "cinta.pie": "Cajas de cartón con su cinta de color y el sello de lo que llevan… y objetos extraviados sueltos: gallinas, helados, globos.",
     "demo.titulo": "Haz tu primera entrega",
     "demo.instruccion": "Arrastra las cajas a la mochila. Llena una fila o una columna y se entrega.",
     "demo.entregado": "¡Entregado!",
@@ -16,17 +16,25 @@ const TEXTOS = {
     "demo.caja": (w, h) => `Caja de ${w}×${h}`,
     "demo.celda": (f, c) => `Fila ${f}, columna ${c}`,
     "como.titulo": "Cómo se juega",
-    "como.1t": "Arrastra", "como.1": "Coge cada caja de la cinta y suéltala en la mochila. Gírala si no entra.",
+    "como.1t": "Arrastra", "como.1": "Coge cada caja de la cinta y suéltala en la mochila. Tócala antes para girarla.",
     "como.2t": "Entrega", "como.2": "Una fila o columna llena se entrega y cobras. Varias a la vez: combo.",
-    "como.3t": "Sobrevive", "como.3": "Helados que se derriten, jarrones frágiles, imanes, apagones… y una gallina con prisa.",
+    "como.3t": "Sobrevive", "como.3": "Objetos extraviados que se mueven, se derriten o explotan, café derramado en la cinta… y una gallina con prisa.",
     "como.4t": "No la enfades", "como.4": "Cada caja que se cae es una taza de café menos. Sin café, Doña Prisas te despide.",
-    "sello.titulo": "Prueba el sello", "sello.instruccion": "Toca la hoja para estampar URGENTE.", "sello.boton": "Estampar",
+    "sello.titulo": "Prueba los sellos", "sello.instruccion": "Toca la hoja: URGENTE y los sellos de goma de las cajas.", "sello.boton": "Estampar",
     "sello.cuenta": (n) => (n >= 5 ? `${n} sellos. Doña Prisas aprueba: ya puedes empezar el turno.` : `${n} ${n === 1 ? "sello" : "sellos"}`),
     "capturas.titulo": "Así se ve", "capturas.escritorioPie": "En escritorio", "capturas.movilPie": "En el móvil",
     "capturas.escritorio": "Partida en escritorio: la cinta arriba, la mochila con cajas, una gallina y un huevo.",
     "capturas.movil": "Partida en el móvil: la mochila vertical con cajas, la gallina y la cinta arriba.",
     "chapa.reto": "Reto diario: las mismas cajas para todos", "chapa.semanas": "Tres semanas de mercancía nueva",
     "chapa.minijuegos": "Minijuegos de paquetes urgentes", "chapa.idiomas": "Español, inglés, portugués y chino",
+    "chapa.tienda": "Tienda con mejoras y mochilas para elegir", "chapa.relajado": "Modo relajado: sin perder tazas",
+    "album.titulo": "Llena el álbum",
+    "album.entradilla": "Algunas cajas llegan con el sello de lo que llevan dentro. Entrégalas y su pegatina va directa a tu álbum.",
+    "album.rotulo": "Pegatinas del almacén", "album.hueco": "Por descubrir",
+    "album.1t": "Cajas selladas", "album.1": "Tres sellos iguales en una línea dan premio.",
+    "album.2t": "Un sobre al día", "album.2": "Al acabar el turno, Doña Prisas te deja una pegatina. Las repetidas se cobran.",
+    "album.3t": "Edición limitada", "album.3": "En Halloween y Navidad hay sellos y pegatinas que solo salen esos días.",
+    "album.4t": "Objetos perdidos", "album.4": "Lo extraviado que entregas va a la estantería. A veces su dueño vuelve a por ello.",
     final: "Doña Prisas te espera en la oficina. Llega puntual.",
     "pie.ia": "Ilustraciones y sonidos creados con ayuda de herramientas de IA.",
     "pie.privacidad": "Esta página no usa cookies ni analítica; solo carga fuentes de Google Fonts.",
@@ -37,7 +45,7 @@ const TEXTOS = {
     entradilla: "You're the new courier. Parcels arrive on the conveyor belt and you pack them into your backpack before they fall off. None of them is normal.",
     detalle: "In your browser · mobile and desktop · no download",
     "cinta.titulo": "On the belt today",
-    "cinta.pie": "Ducks, trumpets, anvils, gnomes… and hens that lay eggs inside your backpack.",
+    "cinta.pie": "Cardboard boxes with coloured tape and a stamp of what's inside… plus loose lost items: hens, ice creams, balloons.",
     "demo.titulo": "Make your first delivery",
     "demo.instruccion": "Drag the boxes into the backpack. Fill a row or a column and it ships.",
     "demo.entregado": "Delivered!",
@@ -47,17 +55,25 @@ const TEXTOS = {
     "demo.caja": (w, h) => `${w}×${h} box`,
     "demo.celda": (r, c) => `Row ${r}, column ${c}`,
     "como.titulo": "How to play",
-    "como.1t": "Drag", "como.1": "Grab each box from the belt and drop it into the backpack. Rotate it if it doesn't fit.",
+    "como.1t": "Drag", "como.1": "Grab each box from the belt and drop it into the backpack. Tap it first to rotate it.",
     "como.2t": "Deliver", "como.2": "A full row or column ships and you get paid. Several at once: combo.",
-    "como.3t": "Survive", "como.3": "Melting ice creams, fragile vases, magnets, blackouts… and a hen in a hurry.",
+    "como.3t": "Survive", "como.3": "Lost items that wander, melt or explode, coffee spilled on the belt… and a hen in a hurry.",
     "como.4t": "Don't upset her", "como.4": "Every box that falls costs you a cup of coffee. Out of coffee, Mrs. Rush fires you.",
-    "sello.titulo": "Try the stamp", "sello.instruccion": "Tap the sheet to stamp it URGENT.", "sello.boton": "Stamp",
+    "sello.titulo": "Try the stamps", "sello.instruccion": "Tap the sheet: URGENT and the rubber stamps from the boxes.", "sello.boton": "Stamp",
     "sello.cuenta": (n) => (n >= 5 ? `${n} stamps. Mrs. Rush approves: your shift can start.` : `${n} ${n === 1 ? "stamp" : "stamps"}`),
     "capturas.titulo": "What it looks like", "capturas.escritorioPie": "On desktop", "capturas.movilPie": "On mobile",
     "capturas.escritorio": "Desktop game: the belt on top, the backpack with boxes, a hen and an egg.",
     "capturas.movil": "Mobile game: the tall backpack with boxes, the hen and the belt on top.",
     "chapa.reto": "Daily challenge: the same boxes for everyone", "chapa.semanas": "Three weeks of new cargo",
     "chapa.minijuegos": "Urgent-parcel minigames", "chapa.idiomas": "English, Spanish, Portuguese and Chinese",
+    "chapa.tienda": "A shop with upgrades and backpacks to pick", "chapa.relajado": "Relaxed mode: no cups lost",
+    "album.titulo": "Fill the album",
+    "album.entradilla": "Some boxes arrive stamped with what's inside. Deliver them and their sticker goes straight into your album.",
+    "album.rotulo": "Warehouse stickers", "album.hueco": "Still to find",
+    "album.1t": "Stamped boxes", "album.1": "Three matching stamps in a line pay a bonus.",
+    "album.2t": "An envelope a day", "album.2": "At the end of your shift, Mrs. Rush leaves you a sticker. Duplicates get paid out.",
+    "album.3t": "Limited edition", "album.3": "At Halloween and Christmas there are stamps and stickers you only get those days.",
+    "album.4t": "Lost property", "album.4": "Lost items you deliver go on the shelf. Sometimes their owner comes back for them.",
     final: "Mrs. Rush is waiting at the office. Don't be late.",
     "pie.ia": "Artwork and sounds made with the help of AI tools.",
     "pie.privacidad": "This page uses no cookies or analytics; it only loads fonts from Google Fonts.",
@@ -97,13 +113,21 @@ aplicarIdioma(elegirIdioma());
 
 // ── Cinta: dos tandas iguales de cajas para que el bucle no tenga costura, y
 // la banda a la misma velocidad que las cajas (como en el juego).
+// Como en el juego: las cajas son de cartón, con su cinta de color y, la mitad, el
+// sello de goma de lo que llevan. Lo especial va suelto: objetos extraviados con su
+// etiqueta.
 const PEGATINAS = ["pato", "trompeta", "yunque", "gnomo", "pecera", "vikingo", "tarta", "cactus", "dentadura", "telescopio"];
-const ESPECIALES = ["helado", "globo", "jarron", "iman", "purpurina", "pollito"];
+const EXTRAVIADOS = ["gallina", "helado", "globo", "jarron", "iman", "purpurina"];
 const CINTAS = ["#C8443B", "#4C6E91", "#6E8B3D", "#E3B23C", "#D98A94", "#8E79A8"];
 const VELOCIDAD = 60; // px por segundo
-const mezcla = PEGATINAS.flatMap((p, i) => (i % 2 ? [`paquete-${p}`, ESPECIALES[(i >> 1) % ESPECIALES.length]] : [`paquete-${p}`]));
-const caja = (id, i) => `<span class="caja" style="--cinta-caja:${CINTAS[i % CINTAS.length]}"><img src="assets/img/${id}.webp" alt="" width="256" height="256"></span>`;
-$("pista").innerHTML = [...mezcla, ...mezcla].map(caja).join("");
+const interiorCaja = (sello) =>
+  `<span class="cinta-adhesiva"></span>${sello ? `<img class="sello-caja" src="assets/img/sello-${sello}.webp" alt="" width="256" height="256" draggable="false">` : ""}`;
+const cajaCarton = (color, sello) => `<span class="caja carton" style="--cinta-caja:${color}">${interiorCaja(sello)}</span>`;
+const mezcla = PEGATINAS.flatMap((p, i) => {
+  const caja = cajaCarton(CINTAS[i % CINTAS.length], i % 3 === 1 ? null : p);
+  return i % 2 ? [caja, `<span class="caja suelta"><img src="assets/img/objeto-${EXTRAVIADOS[(i >> 1) % EXTRAVIADOS.length]}.webp" alt="" width="256" height="256"><i class="etiqueta"></i></span>`] : [caja];
+});
+$("pista").innerHTML = [...mezcla, ...mezcla].join("");
 function ritmoCinta() {
   const pista = $("pista"), cinta = pista.parentElement;
   const tanda = pista.scrollWidth / 2;
@@ -117,11 +141,16 @@ addEventListener("resize", ritmoCinta);
 
 // ── Sello: cada toque estampa URGENTE donde tocas, con su golpe y su sonido.
 const sonido = new Audio("assets/audio/sello.mp3");
+const SELLOS_HOJA = ["pato", "trompeta", "yunque", "gnomo", "pecera", "vikingo", "tarta", "cactus", "dentadura", "telescopio", "calabaza", "regalo"];
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function estampar(x, y) {
   const hoja = $("hoja"), capa = $("hojaSellos");
   const img = document.createElement("img");
-  img.src = "assets/img/sello-urgente.webp"; img.alt = ""; img.width = img.height = 256;
+  // El primero siempre URGENTE; luego, mitad URGENTE y mitad sellos de goma de las cajas.
+  const goma = sellos > 0 && Math.random() < .55;
+  img.src = goma ? `assets/img/sello-${SELLOS_HOJA[Math.floor(Math.random() * SELLOS_HOJA.length)]}.webp` : "assets/img/sello-urgente.webp";
+  img.alt = ""; img.width = img.height = 256;
+  if (goma) img.classList.add("goma");
   const tam = hoja.clientWidth < 500 ? 120 : 150;
   img.style.left = `${x - tam / 2}px`; img.style.top = `${y - tam / 2}px`;
   img.style.rotate = `${(Math.random() - .5) * 34}deg`;
@@ -197,8 +226,10 @@ function nuevaCaja() {
   el.dataset.id = siguienteId++; el.dataset.w = w; el.dataset.h = h;
   el.style.setProperty("--w", w); el.style.setProperty("--h", h);
   el.style.setProperty("--cinta-caja", CINTAS[Math.floor(Math.random() * CINTAS.length)]);
-  const id = mezcla[Math.floor(Math.random() * mezcla.length)];
-  el.innerHTML = `<img src="assets/img/${id}.webp" alt="" width="256" height="256" draggable="false">`;
+  const sello = Math.random() < .55 ? PEGATINAS[Math.floor(Math.random() * PEGATINAS.length)] : null;
+  if (sello) el.dataset.sello = sello;
+  el.classList.add("carton", w >= h ? "horizontal" : "vertical");
+  el.innerHTML = interiorCaja(sello);
   el.setAttribute("aria-label", TEXTOS[idioma]["demo.caja"](w, h));
   el.addEventListener("pointerdown", empezarArrastre);
   el.addEventListener("click", () => elegir(el));
@@ -318,6 +349,7 @@ function entregarLineas() {
   const m = mochila.getBoundingClientRect();
   confeti({ particleCount: 90, spread: 80, startVelocity: 38, origin: { x: (m.left + m.width / 2) / innerWidth, y: (m.top + m.height / 3) / innerHeight } });
   sellarEntregado();
+  piezas.filter((p) => p.el.dataset.sello).slice(0, 2).forEach((p, i) => pegatinaAlAlbum(p.el, i));
   const quitar = () => piezas.forEach((p) => p.el.remove());
   if (animar) gsap.to(piezas.map((p) => p.el), { y: -90, rotation: () => (Math.random() - .5) * 40, scale: .6, opacity: 0, duration: .5, stagger: .05, ease: "back.in(1.4)", onComplete: quitar });
   else quitar();
@@ -326,6 +358,18 @@ function entregarLineas() {
     cta.hidden = false;
     if (animar) gsap.from(cta, { scale: 2, rotation: -14, opacity: 0, duration: .45, ease: "back.out(2)" });
   }
+}
+// Una caja sellada entregada suelta su pegatina, como en el juego (va al álbum).
+function pegatinaAlAlbum(caja, orden) {
+  if (!animar) return;
+  const r = caja.getBoundingClientRect(), m = mochila.getBoundingClientRect();
+  const p = document.createElement("img");
+  p.src = `assets/img/paquete-${caja.dataset.sello}.webp`; p.alt = ""; p.className = "pegatina-vuela";
+  p.style.left = `${r.left - m.left + r.width / 2 - 40}px`; p.style.top = `${r.top - m.top + r.height / 2 - 40}px`;
+  mochila.append(p);
+  gsap.timeline({ delay: .15 + orden * .12, onComplete: () => p.remove() })
+    .fromTo(p, { scale: 0, rotation: -30 }, { scale: 1.2, rotation: 8, duration: .35, ease: "back.out(2.5)" })
+    .to(p, { y: -140, x: (orden ? 1 : -1) * 40, rotation: -10, scale: .7, opacity: 0, duration: .7, ease: "power2.in" }, "+=.25");
 }
 function sellarEntregado() {
   const s = document.createElement("span");
@@ -415,10 +459,16 @@ if (animar) {
     scrollTrigger: { trigger: t, start: "top 85%" },
   }));
   // Notas: cuelgan de la chincheta y se balancean hasta pararse.
-  gsap.from(".nota", {
+  [".notas", ".album-notas"].forEach((lista) => gsap.from(`${lista} .nota`, {
     rotation: (i) => (i % 2 ? 24 : -24), y: -30, opacity: 0, transformOrigin: "50% 0%",
     duration: 1.1, stagger: .12, ease: "elastic.out(1, .4)",
-    scrollTrigger: { trigger: ".notas", start: "top 80%" },
+    scrollTrigger: { trigger: lista, start: "top 80%" },
+  }));
+  // Álbum: la página entra girada y las pegatinas se pegan una a una.
+  gsap.from(".album-hoja", { y: 60, rotation: -6, opacity: 0, duration: .6, ease: "back.out(1.4)", scrollTrigger: { trigger: ".album-mesa", start: "top 80%" } });
+  gsap.from(".pegatina:not(.hueco)", {
+    scale: 1.8, opacity: 0, duration: .3, stagger: .07, ease: "power3.in",
+    scrollTrigger: { trigger: ".album-pegatinas", start: "top 75%" },
   });
   gsap.from(".demo-mesa", { y: 50, opacity: 0, duration: .6, ease: "back.out(1.4)", clearProps: "transform", scrollTrigger: { trigger: ".demo", start: "top 75%" } });
   gsap.from(".hoja", { y: 60, rotation: 4, opacity: 0, duration: .6, ease: "back.out(1.4)", scrollTrigger: { trigger: ".hoja", start: "top 85%" } });
@@ -433,7 +483,9 @@ if (animar) {
     scrollTrigger: { trigger: ".chapas", start: "top 90%" },
   });
   // Final: la jefa espera dando golpecitos, la taza tiembla y el botón llama la atención.
-  gsap.from(".final-escena img", { y: 60, opacity: 0, duration: .6, stagger: .15, ease: "back.out(1.8)", scrollTrigger: { trigger: ".final", start: "top 80%" } });
+  // La entrada usa yPercent y el golpecito de la jefa y: si los dos usaran y, el
+  // golpecito arrancaría desde la posición de entrada y la dejaría tapada por el cartel.
+  gsap.from(".final-escena img", { yPercent: 40, opacity: 0, duration: .6, stagger: .15, ease: "back.out(1.8)", scrollTrigger: { trigger: ".final", start: "top 80%" } });
   gsap.to(".final-jefa", { y: -6, duration: .18, repeat: -1, yoyo: true, repeatDelay: .5, ease: "power1.inOut" });
   gsap.to(".final-taza", { rotation: 4, x: 2, duration: .07, repeat: -1, yoyo: true, ease: "none" });
   gsap.to(".final .boton-sello", { keyframes: { rotation: [-1.5, -6, 3, -4, -1.5] }, duration: .6, repeat: -1, repeatDelay: 2.4, ease: "none" });
