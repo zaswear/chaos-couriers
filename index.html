@@ -23,6 +23,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Special+Elite&family=Nunito:wght@500;700;900&display=swap">
   <link rel="stylesheet" href="estilo.css">
+  <!-- Copiadas en el repo (no CDN): la página sigue sin cargar nada de terceros salvo las fuentes. -->
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/vendor/confetti.browser.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -38,7 +42,7 @@
   <main id="arriba">
     <!-- Portada: la escena del juego alrededor del logo, sobre el corcho. -->
     <section class="portada">
-      <div class="escena">
+      <div class="escena" id="escena">
         <img class="escena-personajes" src="assets/img/escena-inicio.webp" alt="" width="1536" height="768">
         <h1><img id="logo" src="assets/img/logo-es.webp" width="768" height="384" alt="Mensajería del Caos"></h1>
       </div>
@@ -55,6 +59,18 @@
         <div class="cinta-pista" id="pista"></div>
       </div>
       <p class="pie" data-t="cinta.pie">Patos, trompetas, yunques, gnomos… y gallinas que ponen huevos dentro de tu mochila.</p>
+    </section>
+
+    <!-- La demo: una mochila de 4×4 y tres cajas. Llena una fila o columna y se entrega. -->
+    <section class="demo" aria-labelledby="tituloDemo">
+      <h2 id="tituloDemo" class="nota-titulo" data-t="demo.titulo">Haz tu primera entrega</h2>
+      <p class="demo-instruccion" data-t="demo.instruccion">Arrastra las cajas a la mochila. Llena una fila o una columna y se entrega.</p>
+      <div class="demo-mesa">
+        <div class="mochila" id="mochila" role="group" aria-labelledby="tituloDemo"></div>
+        <div class="bandeja" id="bandeja"></div>
+      </div>
+      <p class="demo-estado" id="demoEstado" role="status" aria-live="polite"></p>
+      <a class="boton-sello demo-cta" id="demoCta" href="https://zaswear.itch.io/chaos-couriers" data-t="demo.cta" hidden>Ahora, el turno de verdad</a>
     </section>
 
     <!-- Cómo se juega: notas de papel clavadas en el corcho. -->
@@ -97,7 +113,10 @@
     </section>
 
     <section class="final">
-      <img class="final-jefa" src="assets/img/jefa-orgullosa.webp" alt="" width="256" height="256" loading="lazy">
+      <div class="final-escena">
+        <img class="final-jefa" src="assets/img/jefa-orgullosa.webp" alt="" width="256" height="256" loading="lazy">
+        <img class="final-taza" src="assets/img/taza-nerviosa.webp" alt="" width="256" height="256" loading="lazy">
+      </div>
       <p class="final-texto" data-t="final">Doña Prisas te espera en la oficina. Llega puntual.</p>
       <a class="boton-sello" href="https://zaswear.itch.io/chaos-couriers" data-t="cta.largo">Jugar gratis en itch.io</a>
     </section>
