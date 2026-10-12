@@ -20,7 +20,7 @@ anima con `gsap.from`, así que el estado de reposo es el final.
 - La gallina de la cinta salta al tocarla y a
   la tercera pone un huevo que acaba en pollito. Sección del paquete urgente con
   los seis minijuegos. En Halloween y Navidad (mismas fechas que el juego) la
-  portada usa el fondo de temporada; `?temporada=halloween` para probarlo.
+  luz del tablón de la portada cambia; `?temporada=halloween` para probarlo.
 - Sección del álbum: pegatinas, cajas selladas, sobre del día, edición limitada y
   objetos perdidos. Si el juego cambia, revisar estos textos y el arte copiado de
   `apps/sites/chaos-couriers/assets/img/` del monorepo.

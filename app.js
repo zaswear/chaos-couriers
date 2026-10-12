@@ -235,7 +235,7 @@ gallina.addEventListener("click", () => {
     .to(huevo, { y: -10, duration: .12, yoyo: true, repeat: 12, ease: "sine.inOut" }, "<");
 });
 
-// ── Temporada: en Halloween y Navidad la portada se viste como el juego (mismas
+// ── Temporada: en Halloween y Navidad cambia la luz del tablón de la portada (mismas
 // fechas que TEMPORADAS en escena.js). ?temporada=halloween para probarla.
 const TEMPORADAS = [{ id: "halloween", desde: [10, 20], hasta: [11, 2] }, { id: "christmas", desde: [12, 1], hasta: [1, 6] }];
 function temporada(fecha = new Date()) {

@@ -90,11 +90,24 @@ main > section { width: min(1080px, 100% - 32px); margin: 0 auto; padding: 56px 
 }
 
 /* Portada */
+/* Portada: un tablón de corcho limpio, con un foco de luz cálida detrás del logo,
+   los bordes en sombra y el listón de madera abajo. Los personajes son lo único
+   que llama la atención. */
 main > section.portada {
+  --foco: rgb(255 236 200 / .42); --sombra: rgb(43 29 20 / .55);
   width: 100%; display: grid; justify-items: center; text-align: center;
-  padding: 28px max(16px, calc((100% - 1080px) / 2)) 72px;
-  background: url("assets/img/fondo-oficina.webp") center bottom / cover, #B0602C;
+  padding: 28px max(16px, calc((100% - 1080px) / 2)) 84px;
+  background:
+    radial-gradient(ellipse 50% 42% at 50% 36%, var(--foco), transparent 72%),
+    radial-gradient(ellipse 80% 75% at 50% 42%, transparent 50%, var(--sombra)),
+    url("assets/img/corcho.webp") center / 384px, #B97A45;
   border-bottom: 4px solid var(--tinta); box-shadow: 0 10px 0 color-mix(in srgb, var(--tinta) 35%, transparent);
+}
+main > section.portada::after { /* listón de madera */
+  content: ""; position: absolute; inset: auto 0 0; height: 26px; pointer-events: none;
+  background: linear-gradient(rgb(255 255 255 / .18), transparent 30%, rgb(0 0 0 / .25)),
+    repeating-linear-gradient(90deg, #7A4A28 0 37px, #6E4123 37px 61px, #83522D 61px 97px);
+  border-top: 3px solid var(--tinta); box-shadow: 0 -6px 10px rgb(0 0 0 / .25);
 }
 .escena { display: grid; place-items: center; width: min(980px, 112%); margin-inline: -6%; }
 .escena > * { grid-area: 1 / 1; }
@@ -194,13 +207,9 @@ main > section > :where(:not(.deco, .mancha-cafe)) { position: relative; }
 .minijuego strong { font: 400 20px/1.15 var(--display); }
 .minijuego span { font-size: 14px; color: var(--tinta-suave); }
 
-/* Temporada: Halloween y Navidad visten la portada, como en el juego. */
-[data-temporada="halloween"] main > section.portada { background-image: url("assets/img/fondo-halloween.webp"); }
-[data-temporada="christmas"] main > section.portada { background-image: url("assets/img/fondo-christmas.webp"); }
-@media (max-width: 640px) {
-  [data-temporada="halloween"] main > section.portada { background-image: url("assets/img/fondo-halloween-movil.webp"); }
-  [data-temporada="christmas"] main > section.portada { background-image: url("assets/img/fondo-christmas-movil.webp"); }
-}
+/* Temporada: en Halloween y Navidad cambia la luz del tablón. */
+[data-temporada="halloween"] main > section.portada { --foco: rgb(255 150 50 / .4); --sombra: rgb(38 16 52 / .75); }
+[data-temporada="christmas"] main > section.portada { --foco: rgb(255 244 214 / .5); --sombra: rgb(18 58 36 / .6); }
 @media (max-width: 640px) {
   .gallina { width: 72px; bottom: calc(100% - 14px); left: auto; right: 4%; }
   .urgente-cabecera { flex-direction: column; text-align: center; }
@@ -288,7 +297,7 @@ main > section > :where(:not(.deco, .mancha-cafe)) { position: relative; }
   .marca img { width: 96px; }
   .boton-sello { font-size: 20px; padding: 0 22px; }
   .escena { width: 118%; margin-inline: -9%; }
-  main > section.portada { background-image: url("assets/img/fondo-oficina-movil.webp"); padding-bottom: 56px; }
+  main > section.portada { padding-bottom: 64px; }
   .deco { --t: 96px !important; opacity: .9; }
   .deco-pinzas { right: -46px; } .deco-celo { left: -54px; bottom: -30px; } .deco-cafe { right: -44px; bottom: -50px; }
   .mancha-cafe { width: 150px !important; }
