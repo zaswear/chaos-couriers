@@ -149,44 +149,6 @@ main > section.portada {
 .etiqueta { position: absolute; top: 4px; right: 2px; width: 22px; height: 15px; rotate: 24deg; border: 2px solid var(--tinta); border-radius: 3px 7px 7px 3px; background: radial-gradient(circle at 75% 50%, var(--tinta) 0 2px, var(--papel) 2.5px); }
 .pie { max-width: 60ch; margin: 22px auto 0; padding: 10px 16px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 6px; rotate: .5deg; }
 
-/* Demo: la mochila de cuero con su rejilla de 4×4 y la bandeja de cajas */
-.demo { text-align: center; --celda: 68px; }
-.demo-instruccion { max-width: 52ch; margin: 0 auto 22px; padding: 8px 14px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 6px; rotate: -.4deg; }
-.demo-mesa { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; align-items: center; }
-.mochila {
-  position: relative; display: grid; grid-template: repeat(4, var(--celda)) / repeat(4, var(--celda)); padding: 14px;
-  background: url("assets/img/mochila-cuero.webp") center / 220px; border: 3px solid var(--tinta); border-radius: 22px;
-  box-shadow: inset 0 0 0 3px color-mix(in srgb, #F4C979 50%, transparent), inset 0 0 0 7px transparent, 0 8px 0 color-mix(in srgb, var(--tinta) 40%, transparent);
-  outline: 2px dashed color-mix(in srgb, #F4C979 70%, transparent); outline-offset: -10px; /* costura */
-}
-.celda { margin: 3px; padding: 0; border: 2px dashed color-mix(in srgb, var(--papel) 35%, transparent); border-radius: 8px; background: color-mix(in srgb, var(--tinta) 28%, transparent); cursor: pointer; }
-.celda.previa { background: color-mix(in srgb, var(--cinta-amarilla) 55%, transparent); border-style: solid; border-color: var(--cinta-amarilla); }
-.celda.mal { background: color-mix(in srgb, var(--sello) 50%, transparent); border-style: solid; border-color: var(--sello); }
-.mochila.eligiendo .celda { border-color: color-mix(in srgb, var(--cinta-amarilla) 70%, transparent); }
-.bandeja { display: flex; flex-wrap: wrap; gap: 14px; align-content: center; align-items: center; justify-content: center; width: calc(var(--celda) * 3.4); min-height: calc(var(--celda) * 4 + 28px); padding: 10px; border: 3px dashed color-mix(in srgb, var(--papel) 45%, transparent); border-radius: 14px; }
-.pieza {
-  position: relative; display: grid; place-items: center; padding: 0; --tam: max(calc(var(--celda) * .72), 50px); width: calc(var(--w) * var(--tam) - 6px); height: calc(var(--h) * var(--tam) - 6px);
-  border: 3px solid var(--tinta); border-radius: 8px; overflow: hidden; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
-  box-shadow: 0 4px 0 color-mix(in srgb, var(--tinta) 45%, transparent); transition: scale .15s var(--suave);
-}
-.pieza .sello-caja { width: min(64px, calc(var(--tam) * .78)); }
-.pegatina-vuela { position: absolute; z-index: 6; width: 80px; pointer-events: none; filter: drop-shadow(0 6px 4px color-mix(in srgb, var(--tinta) 45%, transparent)); }
-@media (hover: hover) { .bandeja .pieza:hover { scale: 1.08; } }
-.pieza.elegida { scale: 1.1; outline: 4px solid var(--cinta-amarilla); outline-offset: 3px; }
-.pieza.en-vuelo { --tam: var(--celda); position: fixed; z-index: 40; scale: 1.04; opacity: .85; cursor: grabbing; rotate: -3deg; box-shadow: 0 14px 18px color-mix(in srgb, var(--tinta) 45%, transparent); transition: none; }
-.pieza.colocada { width: auto; height: auto; margin: 3px; scale: 1; transition: none; cursor: default; z-index: 1; }
-.sello-entregado {
-  position: absolute; inset: 50% auto auto 50%; translate: -50% -50%; rotate: -12deg; z-index: 5; padding: 6px 14px; white-space: nowrap; pointer-events: none;
-  border: 4px solid var(--sello); border-radius: 8px; color: var(--sello); background: color-mix(in srgb, var(--papel) 85%, transparent);
-  font: 400 34px var(--display); letter-spacing: .04em; text-transform: uppercase;
-}
-.demo-estado { margin: 22px auto 0; display: inline-block; padding: 2px 10px; background: var(--tinta); color: var(--papel); font: 15px var(--maquina); }
-.demo-estado:empty { display: none; }
-.demo-cta { margin-top: 18px; }
-.demo-cta[hidden] { display: none; }
-.polvo { position: absolute; width: 90px; pointer-events: none; z-index: 2; }
-.escena { position: relative; }
-
 /* Objetos del juego clavados o tirados por el tablón. Decorado: detrás del
    contenido, sin eventos y fuera del árbol de accesibilidad (alt=""). */
 /* main e body crean su propio contexto: así los z-index negativos quedan sobre el
@@ -195,10 +157,10 @@ body { isolation: isolate; }
 main { position: relative; z-index: 0; }
 main > section { position: relative; }
 .deco { position: absolute; z-index: -1; pointer-events: none; width: var(--t, 150px); rotate: var(--r, 0deg); filter: drop-shadow(0 6px 4px color-mix(in srgb, var(--tinta) 40%, transparent)); }
-main > section > :not(.deco, .mancha-cafe) { position: relative; }
+/* :where() deja esta regla sin peso: cualquier clase con position propia la gana. */
+main > section > :where(:not(.deco, .mancha-cafe)) { position: relative; }
 .deco-pinzas { --t: 190px; --r: -28deg; top: 10px; right: -150px; }
 .deco-celo { --t: 170px; --r: 12deg; bottom: 30px; left: -170px; }
-.deco-chincheta { --t: 54px; --r: 30deg; top: 70px; right: -40px; }
 .deco-cafe { --t: 190px; --r: -8deg; bottom: -40px; right: -170px; }
 .deco-borron { --t: 200px; --r: 20deg; top: 60px; left: -150px; opacity: .85; filter: none; }
 .deco-cajas { --t: 170px; --r: 6deg; top: -10px; right: -40px; }
@@ -209,6 +171,40 @@ main > section > :not(.deco, .mancha-cafe) { position: relative; }
 .final .mancha-cafe { bottom: 10px; left: 6%; width: 250px; rotate: -40deg; }
 @media (max-width: 1240px) {
   .deco-pinzas { right: -90px; } .deco-celo { left: -110px; } .deco-cafe { right: -110px; } .deco-borron { left: -110px; }
+}
+
+/* La gallina sobre la cinta, y su huevo. */
+.cinta-marco { position: relative; }
+.gallina { position: absolute; z-index: 3; bottom: calc(100% - 22px); left: 7%; width: 112px; padding: 0; border: 0; background: none; cursor: pointer; }
+.gallina img { width: 100%; filter: drop-shadow(0 5px 2px color-mix(in srgb, var(--tinta) 45%, transparent)); }
+.huevo { position: absolute; z-index: 4; width: 52px; pointer-events: none; }
+
+/* Paquete urgente: la caja que tiembla y los seis minijuegos. */
+.urgente-cabecera { display: flex; gap: 22px; align-items: center; margin-bottom: 26px; }
+.urgente-caja { width: 130px; flex: none; filter: drop-shadow(0 6px 3px color-mix(in srgb, var(--tinta) 45%, transparent)); }
+.urgente-entradilla { margin: 0; max-width: 56ch; padding: 12px 16px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 6px; rotate: -.5deg; }
+.minijuegos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 760px) { .minijuegos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } .minijuego img { width: 72px; height: 72px; } .minijuego strong { font-size: 17px; } .minijuego span { font-size: 13px; } }
+.minijuego {
+  display: grid; gap: 4px; justify-items: center; text-align: center; padding: 14px 14px 16px; background: var(--papel-blanco); border: 2px solid var(--tinta);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--tinta) 30%, transparent); rotate: var(--g, -1deg);
+}
+.minijuego:nth-child(2n) { --g: 1.4deg; } .minijuego:nth-child(3n) { --g: -.4deg; }
+.minijuego img { width: 96px; height: 96px; object-fit: contain; }
+.minijuego strong { font: 400 20px/1.15 var(--display); }
+.minijuego span { font-size: 14px; color: var(--tinta-suave); }
+
+/* Temporada: Halloween y Navidad visten la portada, como en el juego. */
+[data-temporada="halloween"] main > section.portada { background-image: url("assets/img/fondo-halloween.webp"); }
+[data-temporada="christmas"] main > section.portada { background-image: url("assets/img/fondo-christmas.webp"); }
+@media (max-width: 640px) {
+  [data-temporada="halloween"] main > section.portada { background-image: url("assets/img/fondo-halloween-movil.webp"); }
+  [data-temporada="christmas"] main > section.portada { background-image: url("assets/img/fondo-christmas-movil.webp"); }
+}
+@media (max-width: 640px) {
+  .gallina { width: 72px; bottom: calc(100% - 14px); left: auto; right: 4%; }
+  .urgente-cabecera { flex-direction: column; text-align: center; }
+  .urgente-caja { width: 100px; }
 }
 
 /* Cómo se juega */
@@ -296,22 +292,18 @@ main > section > :not(.deco, .mancha-cafe) { position: relative; }
   .deco { --t: 96px !important; opacity: .9; }
   .deco-pinzas { right: -46px; } .deco-celo { left: -54px; bottom: -30px; } .deco-cafe { right: -44px; bottom: -50px; }
   .mancha-cafe { width: 150px !important; }
-  .deco-borron { left: -60px; } .deco-cajas { right: -20px; top: -20px; } .deco-chincheta { --t: 36px !important; right: -6px; }
-  .escena h1 { width: 52%; }
+  .deco-borron { left: -60px; } .deco-cajas { right: -20px; top: -20px; }   .escena h1 { width: 52%; }
   .cinta { height: 108px; }
   .caja { width: 84px; height: 72px; } .caja:nth-child(3n) { width: 120px; } .caja:nth-child(4n + 1) { height: 86px; }
   .caja.suelta { width: 80px; height: 80px; } .caja.suelta img { width: 68px; }
   .polaroids { grid-template-columns: 1fr; }
   .polaroid.estrecha { width: 62%; justify-self: center; }
   .hoja { height: 240px; }
-  .demo { --celda: min(62px, (100vw - 80px) / 4); }
-  .demo-mesa { flex-direction: column; gap: 14px; }
-  .bandeja { min-height: calc(var(--celda) * 2.4); width: 100%; }
   .hoja-sellos img { width: 120px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .cinta, .cinta-pista, .hoja.golpe, .hoja-sellos img { animation: none; }
-  .boton-sello, .nota, .pieza { transition: none; }
+  .boton-sello, .nota { transition: none; }
 }
 

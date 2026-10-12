@@ -8,14 +8,15 @@ const TEXTOS = {
     "pie.marca": "Google Play y el logotipo de Google Play son marcas de Google LLC.",
     "cinta.titulo": "Hoy en la cinta",
     "cinta.pie": "Cajas de cartón con su cinta de color y el sello de lo que llevan… y objetos extraviados sueltos: gallinas, helados, globos.",
-    "demo.titulo": "Haz tu primera entrega",
-    "demo.instruccion": "Arrastra las cajas a la mochila. Llena una fila o una columna y se entrega.",
-    "demo.entregado": "¡Entregado!",
-    "demo.entregas": (n) => (n >= 3 ? `${n} entregas. Doña Prisas casi sonríe.` : `${n} ${n === 1 ? "entrega" : "entregas"}`),
-    "demo.atasco": "¡No cabe nada! Se cae todo y vuelta a empezar.",
-    "demo.cta": "Ahora, el turno de verdad",
-    "demo.caja": (w, h) => `Caja de ${w}×${h}`,
-    "demo.celda": (f, c) => `Fila ${f}, columna ${c}`,
+    "gallina.etiqueta": "Gallina: tócala",
+    "urgente.titulo": "¡Paquete urgente!",
+    "urgente.entradilla": "Una vez al día puede llegar un paquete urgente. Entrégalo y se para todo: un minijuego con premio en puntos, sueldo o una taza más.",
+    "mj.clasificart": "Clasificar el correo", "mj.clasificar": "Toca la saca del color de la cinta de cada paquete antes de que caiga.",
+    "mj.gallinat": "¡Que se escapa la gallina!", "mj.gallina": "Toca las gallinas que asoman. Al pato, ni tocarlo.",
+    "mj.rutat": "Ruta de reparto", "mj.ruta": "Cambia de carril para coger paquetes y esquivar charcos, gallinas y gatos.",
+    "mj.sellot": "El sello perfecto", "mj.sello": "Estampa cuando el hueco del sello pase por el recuadro rojo.",
+    "mj.basculat": "La báscula", "mj.bascula": "Para la aguja en la marca roja: el peso que pide el cliente.",
+    "mj.perdidost": "¿Esto es suyo?", "mj.perdidos": "Cada cliente describe lo que perdió. Dale el objeto correcto de la estantería.",
     "como.titulo": "Cómo se juega",
     "como.1t": "Arrastra", "como.1": "Coge cada caja de la cinta y suéltala en la mochila. Tócala antes para girarla.",
     "como.2t": "Entrega", "como.2": "Una fila o columna llena se entrega y cobras. Varias a la vez: combo.",
@@ -49,14 +50,15 @@ const TEXTOS = {
     "pie.marca": "Google Play and the Google Play logo are trademarks of Google LLC.",
     "cinta.titulo": "On the belt today",
     "cinta.pie": "Cardboard boxes with coloured tape and a stamp of what's inside… plus loose lost items: hens, ice creams, balloons.",
-    "demo.titulo": "Make your first delivery",
-    "demo.instruccion": "Drag the boxes into the backpack. Fill a row or a column and it ships.",
-    "demo.entregado": "Delivered!",
-    "demo.entregas": (n) => (n >= 3 ? `${n} deliveries. Mrs. Rush almost smiles.` : `${n} ${n === 1 ? "delivery" : "deliveries"}`),
-    "demo.atasco": "Nothing fits! Everything falls out, start over.",
-    "demo.cta": "Now, the real shift",
-    "demo.caja": (w, h) => `${w}×${h} box`,
-    "demo.celda": (r, c) => `Row ${r}, column ${c}`,
+    "gallina.etiqueta": "Hen: tap her",
+    "urgente.titulo": "Urgent parcel!",
+    "urgente.entradilla": "Once a day an urgent parcel may turn up. Deliver it and everything stops: a minigame with a prize in points, wages or an extra cup.",
+    "mj.clasificart": "Sort the mail", "mj.clasificar": "Tap the sack matching each parcel's tape colour before it lands.",
+    "mj.gallinat": "The hen's escaping!", "mj.gallina": "Tap the hens popping up. Don't you dare touch the duck.",
+    "mj.rutat": "Delivery run", "mj.ruta": "Switch lanes to grab parcels and dodge puddles, hens and cats.",
+    "mj.sellot": "The perfect stamp", "mj.sello": "Stamp when the stamp box passes over the red frame.",
+    "mj.basculat": "The scale", "mj.bascula": "Stop the needle on the red mark: the weight the customer says.",
+    "mj.perdidost": "Is this yours?", "mj.perdidos": "Each customer describes what they lost. Hand them the right item from the shelf.",
     "como.titulo": "How to play",
     "como.1t": "Drag", "como.1": "Grab each box from the belt and drop it into the backpack. Tap it first to rotate it.",
     "como.2t": "Deliver", "como.2": "A full row or column ships and you get paid. Several at once: combo.",
@@ -86,7 +88,6 @@ const TEXTOS = {
 
 const $ = (id) => document.getElementById(id);
 let idioma = "es", sellos = 0;
-const refrescos = []; // lo que hay que repintar al cambiar de idioma (la demo)
 
 function elegirIdioma() {
   const pedido = new URLSearchParams(location.search).get("lang");
@@ -101,6 +102,7 @@ function aplicarIdioma(l) {
   document.documentElement.lang = l;
   document.querySelectorAll("[data-t]").forEach((el) => { const v = t[el.dataset.t]; if (typeof v === "string") el.textContent = v; });
   document.querySelectorAll("[data-t-alt]").forEach((el) => { el.alt = t[el.dataset.tAlt]; });
+  document.querySelectorAll("[data-t-label]").forEach((el) => el.setAttribute("aria-label", t[el.dataset.tLabel]));
   $("logo").src = $("logoBarra").src = `assets/img/logo-${l}.webp`;
   $("logo").alt = l === "es" ? "Mensajería del Caos" : "Chaos Couriers";
   $("capEscritorio").src = `assets/img/captura-escritorio-${l}.webp`;
@@ -111,7 +113,6 @@ function aplicarIdioma(l) {
   });
   document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === l));
   if (sellos) $("cuenta").textContent = t["sello.cuenta"](sellos);
-  refrescos.forEach((f) => f());
 }
 document.querySelectorAll("[data-lang]").forEach((b) => b.addEventListener("click", () => {
   aplicarIdioma(b.dataset.lang);
@@ -125,7 +126,7 @@ aplicarIdioma(elegirIdioma());
 // sello de goma de lo que llevan. Lo especial va suelto: objetos extraviados con su
 // etiqueta.
 const PEGATINAS = ["pato", "trompeta", "yunque", "gnomo", "pecera", "vikingo", "tarta", "cactus", "dentadura", "telescopio"];
-const EXTRAVIADOS = ["gallina", "helado", "globo", "jarron", "iman", "purpurina"];
+const EXTRAVIADOS = ["gallina", "helado", "gato", "globo", "jarron", "trasto", "iman", "purpurina", "confeti", "hielo-seco"];
 const CINTAS = ["#C8443B", "#4C6E91", "#6E8B3D", "#E3B23C", "#D98A94", "#8E79A8"];
 const VELOCIDAD = 60; // px por segundo
 const interiorCaja = (sello) =>
@@ -133,7 +134,7 @@ const interiorCaja = (sello) =>
 const cajaCarton = (color, sello) => `<span class="caja carton" style="--cinta-caja:${color}">${interiorCaja(sello)}</span>`;
 const mezcla = PEGATINAS.flatMap((p, i) => {
   const caja = cajaCarton(CINTAS[i % CINTAS.length], i % 3 === 1 ? null : p);
-  return i % 2 ? [caja, `<span class="caja suelta"><img src="assets/img/objeto-${EXTRAVIADOS[(i >> 1) % EXTRAVIADOS.length]}.webp" alt="" width="256" height="256"><i class="etiqueta"></i></span>`] : [caja];
+  return i % 3 !== 2 ? [caja, `<span class="caja suelta"><img src="assets/img/objeto-${EXTRAVIADOS[i % EXTRAVIADOS.length]}.webp" alt="" width="256" height="256"><i class="etiqueta"></i></span>`] : [caja];
 });
 $("pista").innerHTML = [...mezcla, ...mezcla].join("");
 function ritmoCinta() {
@@ -191,227 +192,64 @@ function confeti(opciones) {
   if (reduceMotion || typeof window.confetti !== "function") return;
   window.confetti({ colors: PALETA, shapes: ["square"], disableForReducedMotion: true, zIndex: 50, ...opciones });
 }
-const SONIDOS = Object.fromEntries(["clac", "cobro", "cae"].map((n) => [n, new Audio(`assets/audio/${n}.mp3`)]));
+const SONIDOS = Object.fromEntries(["clac", "cacarea"].map((n) => [n, new Audio(`assets/audio/${n}.mp3`)]));
 function suena(nombre, volumen = .6) {
   try { const s = SONIDOS[nombre].cloneNode(); s.volume = volumen; s.play().catch(() => {}); } catch { /* sin audio */ }
 }
 const gsap = window.gsap;
 const animar = Boolean(gsap) && !reduceMotion;
 
-// ── Demo: mochila de 4×4. Tres cajas en la bandeja; se arrastran (o se tocan y luego
-// se toca la casilla). Fila o columna llena → se entregan enteras las cajas que la
-// tocan, como la jefa en el juego. Si ninguna cabe, se cae todo.
-const LADO = 4;
-const FORMAS = [[1, 1], [2, 1], [1, 2], [3, 1], [1, 3], [2, 2], [2, 1], [1, 2]];
-const mochila = $("mochila"), bandeja = $("bandeja"), estado = $("demoEstado");
-let rejilla = Array.from({ length: LADO }, () => Array(LADO).fill(null));
-let entregas = 0, elegida = null, siguienteId = 0;
-const enMochila = new Map(); // id → { el, f, c, w, h }
-
-for (let f = 0; f < LADO; f++) for (let c = 0; c < LADO; c++) {
-  const b = document.createElement("button");
-  b.type = "button"; b.className = "celda"; b.dataset.f = f; b.dataset.c = c;
-  b.style.gridArea = `${f + 1} / ${c + 1}`;
-  b.addEventListener("click", () => { if (elegida) intentarColocar(elegida, f, c); });
-  mochila.append(b);
-}
-const celdas = [...mochila.querySelectorAll(".celda")];
-const celda = (f, c) => celdas[f * LADO + c];
-
-function cabe(w, h, f, c) {
-  if (f < 0 || c < 0 || f + h > LADO || c + w > LADO) return false;
-  for (let i = f; i < f + h; i++) for (let j = c; j < c + w; j++) if (rejilla[i][j] !== null) return false;
-  return true;
-}
-const cabeEnAlgunSitio = (w, h) => rejilla.some((fila, f) => fila.some((_, c) => cabe(w, h, f, c)));
-
-function nuevaCaja() {
-  // Elige una forma que quepa, si hay alguna: la demo tiene que poder ganarse.
-  const posibles = FORMAS.filter(([w, h]) => cabeEnAlgunSitio(w, h));
-  const [w, h] = (posibles.length ? posibles : FORMAS)[Math.floor(Math.random() * (posibles.length || FORMAS.length))];
-  const el = document.createElement("button");
-  el.type = "button"; el.className = "pieza";
-  el.dataset.id = siguienteId++; el.dataset.w = w; el.dataset.h = h;
-  el.style.setProperty("--w", w); el.style.setProperty("--h", h);
-  el.style.setProperty("--cinta-caja", CINTAS[Math.floor(Math.random() * CINTAS.length)]);
-  const sello = Math.random() < .55 ? PEGATINAS[Math.floor(Math.random() * PEGATINAS.length)] : null;
-  if (sello) el.dataset.sello = sello;
-  el.classList.add("carton", w >= h ? "horizontal" : "vertical");
-  el.innerHTML = interiorCaja(sello);
-  el.setAttribute("aria-label", TEXTOS[idioma]["demo.caja"](w, h));
-  el.addEventListener("pointerdown", empezarArrastre);
-  el.addEventListener("click", () => elegir(el));
-  return el;
-}
-function rellenarBandeja() {
-  const nuevas = [];
-  while (bandeja.children.length < 3) { const el = nuevaCaja(); bandeja.append(el); nuevas.push(el); }
-  if (animar && nuevas.length) gsap.from(nuevas, { x: 160, rotation: 12, opacity: 0, duration: .5, stagger: .08, ease: "back.out(1.6)" });
-  comprobarAtasco();
-}
-
-function elegir(el) {
-  if (el.dataset.arrastrada) return; // el click que sigue a un arrastre
-  if (elegida) elegida.classList.remove("elegida");
-  elegida = elegida === el ? null : el;
-  elegida?.classList.add("elegida");
-  mochila.classList.toggle("eligiendo", Boolean(elegida));
-}
-
-// Arrastre propio con pointer events: la caja sigue al dedo un poco por encima,
-// para que el dedo no la tape, y la mochila marca dónde caería.
-let arrastre = null;
-function empezarArrastre(e) {
-  if (e.button !== 0) return;
-  const el = e.currentTarget;
-  arrastre = { el, x0: e.clientX, y0: e.clientY, movida: false, encima: e.pointerType === "touch" ? 50 : 0, destino: null };
-  el.setPointerCapture(e.pointerId);
-  el.addEventListener("pointermove", moverArrastre);
-  el.addEventListener("pointerup", soltarArrastre);
-  el.addEventListener("pointercancel", soltarArrastre);
-}
-function moverArrastre(e) {
-  const a = arrastre;
-  if (!a) return;
-  if (!a.movida && Math.hypot(e.clientX - a.x0, e.clientY - a.y0) < 6) return;
-  if (!a.movida) {
-    a.movida = true; a.el.dataset.arrastrada = "1"; a.el.classList.add("en-vuelo");
-    if (elegida) { elegida.classList.remove("elegida"); elegida = null; mochila.classList.remove("eligiendo"); }
+// ── La gallina de la cinta: picotea, se duerme si nadie le hace caso, salta al
+// tocarla y a la tercera pone un huevo que eclosiona y el pollito sale corriendo.
+const gallina = $("gallina"), gallinaImg = $("gallinaImg");
+let toques = 0, siesta = 0, ocupada = false;
+const pose = (p) => { gallinaImg.src = `assets/img/gallina-${p}.webp`; };
+const aDormir = () => { clearTimeout(siesta); siesta = setTimeout(() => pose("duerme"), 12000); };
+aDormir();
+gallina.addEventListener("click", () => {
+  if (ocupada) return;
+  toques++;
+  suena("cacarea", .5);
+  aDormir();
+  if (toques % 3) {
+    pose("salta");
+    if (animar) gsap.timeline({ onComplete: () => pose("picotea") }).to(gallina, { y: -40, duration: .22, ease: "power2.out" }).to(gallina, { y: 0, duration: .45, ease: "bounce.out" });
+    else setTimeout(() => pose("picotea"), 600);
+    return;
   }
-  const tam = celdas[0].getBoundingClientRect().width;
-  const w = +a.el.dataset.w, h = +a.el.dataset.h;
-  const izq = e.clientX - (w * tam) / 2, arr = e.clientY - (h * tam) / 2 - a.encima;
-  a.el.style.left = `${izq}px`; a.el.style.top = `${arr}px`;
-  // Casilla de la esquina superior izquierda de la caja.
-  const m = celdas[0].getBoundingClientRect();
-  const c = Math.round((izq - m.left) / tam), f = Math.round((arr - m.top) / tam);
-  a.destino = f > -1 && c > -1 && f < LADO && c < LADO ? { f, c } : null;
-  marcarPrevia(w, h, a.destino);
-}
-function soltarArrastre(e) {
-  const a = arrastre; arrastre = null;
-  if (!a) return;
-  const el = a.el;
-  el.removeEventListener("pointermove", moverArrastre);
-  el.removeEventListener("pointerup", soltarArrastre);
-  el.removeEventListener("pointercancel", soltarArrastre);
-  marcarPrevia(0, 0, null);
-  if (!a.movida) return;
-  setTimeout(() => delete el.dataset.arrastrada, 0); // el click de este mismo gesto ya ha pasado
-  const desde = el.getBoundingClientRect();
-  el.classList.remove("en-vuelo"); el.style.left = el.style.top = "";
-  if (e.type === "pointerup" && a.destino && intentarColocar(el, a.destino.f, a.destino.c, desde)) return;
-  // Vuelve a la bandeja desde donde se soltó.
-  if (animar) { const hasta = el.getBoundingClientRect(); gsap.from(el, { x: desde.left - hasta.left, y: desde.top - hasta.top, duration: .35, ease: "power3.out" }); }
-}
-function marcarPrevia(w, h, destino) {
-  celdas.forEach((b) => b.classList.remove("previa", "mal"));
-  if (!destino) return;
-  const vale = cabe(w, h, destino.f, destino.c);
-  for (let i = destino.f; i < Math.min(destino.f + h, LADO); i++)
-    for (let j = destino.c; j < Math.min(destino.c + w, LADO); j++) celda(i, j).classList.add(vale ? "previa" : "mal");
-}
-
-function intentarColocar(el, f, c, desde) {
-  const w = +el.dataset.w, h = +el.dataset.h, id = el.dataset.id;
-  if (!cabe(w, h, f, c)) {
-    if (animar) gsap.fromTo(mochila, { x: -6 }, { x: 0, duration: .4, ease: "elastic.out(1, .3)" });
-    return false;
-  }
-  desde ??= el.getBoundingClientRect();
-  for (let i = f; i < f + h; i++) for (let j = c; j < c + w; j++) rejilla[i][j] = id;
-  el.classList.remove("elegida"); elegida = null; mochila.classList.remove("eligiendo");
-  el.removeEventListener("pointerdown", empezarArrastre);
-  el.classList.add("colocada"); el.disabled = true;
-  el.style.gridArea = `${f + 1} / ${c + 1} / span ${h} / span ${w}`;
-  mochila.append(el);
-  enMochila.set(id, { el, f, c, w, h });
-  suena("clac");
-  if (animar) {
-    const hasta = el.getBoundingClientRect();
-    gsap.timeline()
-      .from(el, { x: desde.left - hasta.left, y: desde.top - hasta.top, scale: desde.width / hasta.width, duration: .22, ease: "power2.in" })
-      .to(el, { scaleY: .86, scaleX: 1.08, duration: .07, transformOrigin: "50% 100%" })
-      .to(el, { scaleY: 1, scaleX: 1, duration: .35, ease: "elastic.out(1.2, .4)" });
-  }
-  setTimeout(() => { entregarLineas(); rellenarBandeja(); }, animar ? 300 : 0);
-  return true;
-}
-
-function entregarLineas() {
-  const llenas = [];
-  for (let i = 0; i < LADO; i++) {
-    if (rejilla[i].every((v) => v !== null)) llenas.push(...rejilla[i]);
-    if (rejilla.every((fila) => fila[i] !== null)) llenas.push(...rejilla.map((fila) => fila[i]));
-  }
-  if (!llenas.length) return;
-  const ids = new Set(llenas);
-  const piezas = [...ids].map((id) => enMochila.get(id));
-  for (const p of piezas) {
-    for (let i = p.f; i < p.f + p.h; i++) for (let j = p.c; j < p.c + p.w; j++) rejilla[i][j] = null;
-    enMochila.delete(p.el.dataset.id);
-  }
-  entregas++;
-  estado.textContent = TEXTOS[idioma]["demo.entregas"](entregas);
-  suena("cobro");
-  const m = mochila.getBoundingClientRect();
-  confeti({ particleCount: 90, spread: 80, startVelocity: 38, origin: { x: (m.left + m.width / 2) / innerWidth, y: (m.top + m.height / 3) / innerHeight } });
-  sellarEntregado();
-  piezas.filter((p) => p.el.dataset.sello).slice(0, 2).forEach((p, i) => pegatinaAlAlbum(p.el, i));
-  const quitar = () => piezas.forEach((p) => p.el.remove());
-  if (animar) gsap.to(piezas.map((p) => p.el), { y: -90, rotation: () => (Math.random() - .5) * 40, scale: .6, opacity: 0, duration: .5, stagger: .05, ease: "back.in(1.4)", onComplete: quitar });
-  else quitar();
-  if (entregas === 3) {
-    const cta = $("demoCta");
-    cta.hidden = false;
-    if (animar) gsap.from(cta, { scale: 2, rotation: -14, opacity: 0, duration: .45, ease: "back.out(2)" });
-  }
-}
-// Una caja sellada entregada suelta su pegatina, como en el juego (va al álbum).
-function pegatinaAlAlbum(caja, orden) {
-  if (!animar) return;
-  const r = caja.getBoundingClientRect(), m = mochila.getBoundingClientRect();
-  const p = document.createElement("img");
-  p.src = `assets/img/paquete-${caja.dataset.sello}.webp`; p.alt = ""; p.className = "pegatina-vuela";
-  p.style.left = `${r.left - m.left + r.width / 2 - 40}px`; p.style.top = `${r.top - m.top + r.height / 2 - 40}px`;
-  mochila.append(p);
-  gsap.timeline({ delay: .15 + orden * .12, onComplete: () => p.remove() })
-    .fromTo(p, { scale: 0, rotation: -30 }, { scale: 1.2, rotation: 8, duration: .35, ease: "back.out(2.5)" })
-    .to(p, { y: -140, x: (orden ? 1 : -1) * 40, rotation: -10, scale: .7, opacity: 0, duration: .7, ease: "power2.in" }, "+=.25");
-}
-function sellarEntregado() {
-  const s = document.createElement("span");
-  s.className = "sello-entregado"; s.textContent = TEXTOS[idioma]["demo.entregado"];
-  s.setAttribute("aria-hidden", "true");
-  mochila.append(s);
-  if (animar) gsap.timeline({ onComplete: () => s.remove() })
-    .from(s, { scale: 2.4, opacity: 0, duration: .25, ease: "power3.in" })
-    .to(s, { opacity: 0, duration: .4, delay: .7 });
-  else setTimeout(() => s.remove(), 1200);
-}
-
-function comprobarAtasco() {
-  const cajas = [...bandeja.children];
-  if (!cajas.length || cajas.some((el) => cabeEnAlgunSitio(+el.dataset.w, +el.dataset.h))) return;
-  estado.textContent = TEXTOS[idioma]["demo.atasco"];
-  suena("cae");
-  const piezas = [...enMochila.values()].map((p) => p.el);
-  rejilla = Array.from({ length: LADO }, () => Array(LADO).fill(null));
-  enMochila.clear();
-  const quitar = () => { piezas.forEach((el) => el.remove()); bandeja.replaceChildren(); rellenarBandeja(); };
-  if (animar) {
-    gsap.fromTo(mochila, { rotation: -3 }, { rotation: 0, duration: .6, ease: "elastic.out(1, .3)" });
-    gsap.to(piezas, { y: 400, rotation: () => (Math.random() - .5) * 90, opacity: 0, duration: .8, delay: .5, stagger: .04, ease: "power2.in", onComplete: quitar });
-  } else quitar();
-}
-
-refrescos.push(() => {
-  celdas.forEach((b) => b.setAttribute("aria-label", TEXTOS[idioma]["demo.celda"](+b.dataset.f + 1, +b.dataset.c + 1)));
-  bandeja.querySelectorAll(".pieza").forEach((el) => el.setAttribute("aria-label", TEXTOS[idioma]["demo.caja"](+el.dataset.w, +el.dataset.h)));
-  if (entregas) estado.textContent = TEXTOS[idioma]["demo.entregas"](entregas);
+  ocupada = true;
+  pose("pone");
+  const huevo = document.createElement("img");
+  huevo.className = "huevo"; huevo.alt = ""; huevo.src = "assets/img/huevo.webp";
+  gallina.parentElement.append(huevo);
+  huevo.style.left = `${gallina.offsetLeft + gallina.offsetWidth * .35}px`;
+  huevo.style.top = `${gallina.offsetTop + gallina.offsetHeight * .55}px`;
+  const fases = ["huevo-grieta", "huevo-eclosiona", "pollito"];
+  const fin = () => { huevo.remove(); pose("picotea"); ocupada = false; };
+  if (!animar) { setTimeout(fin, 800); return; }
+  const tl = gsap.timeline({ onComplete: fin });
+  tl.from(huevo, { y: -20, scale: .4, duration: .35, ease: "bounce.out" });
+  fases.forEach((f) => tl.add(() => { huevo.src = `assets/img/${f}.webp`; }, "+=.55").to(huevo, { rotation: 10, duration: .06, yoyo: true, repeat: 3 }));
+  tl.add(() => pose("picotea"))
+    .to(huevo, { x: () => innerWidth, duration: 1.6, ease: "power1.in" }, "+=.2")
+    .to(huevo, { y: -10, duration: .12, yoyo: true, repeat: 12, ease: "sine.inOut" }, "<");
 });
-refrescos.at(-1)();
-rellenarBandeja();
+
+// ── Temporada: en Halloween y Navidad la portada se viste como el juego (mismas
+// fechas que TEMPORADAS en escena.js). ?temporada=halloween para probarla.
+const TEMPORADAS = [{ id: "halloween", desde: [10, 20], hasta: [11, 2] }, { id: "christmas", desde: [12, 1], hasta: [1, 6] }];
+function temporada(fecha = new Date()) {
+  const forzada = new URLSearchParams(location.search).get("temporada");
+  if (TEMPORADAS.some((x) => x.id === forzada)) return forzada;
+  const hoy = (fecha.getMonth() + 1) * 100 + fecha.getDate();
+  for (const { id, desde, hasta } of TEMPORADAS) {
+    const a = desde[0] * 100 + desde[1], b = hasta[0] * 100 + hasta[1];
+    if (a <= b ? hoy >= a && hoy <= b : hoy >= a || hoy <= b) return id;
+  }
+  return null;
+}
+const deTemporada = temporada();
+if (deTemporada) document.body.dataset.temporada = deTemporada;
 
 // ── Cinta del escaparate: tocar una caja la hace saltar.
 $("pista").addEventListener("pointerdown", (e) => {
@@ -478,13 +316,16 @@ if (animar) {
     scale: 1.8, opacity: 0, duration: .3, stagger: .07, ease: "power3.in",
     scrollTrigger: { trigger: ".album-pegatinas", start: "top 75%" },
   });
-  gsap.from(".demo-mesa", { y: 50, opacity: 0, duration: .6, ease: "back.out(1.4)", clearProps: "transform", scrollTrigger: { trigger: ".demo", start: "top 75%" } });
   gsap.from(".hoja", { y: 60, rotation: 4, opacity: 0, duration: .6, ease: "back.out(1.4)", scrollTrigger: { trigger: ".hoja", start: "top 85%" } });
   // Polaroids: caen sobre el corcho.
   gsap.from(".polaroid", {
     y: -140, rotation: (i) => (i ? 14 : -10), opacity: 0, duration: .8, stagger: .15, ease: "bounce.out",
     scrollTrigger: { trigger: ".polaroids", start: "top 75%" },
   });
+  // Paquete urgente: tiembla de vez en cuando; los minijuegos entran como fichas.
+  gsap.to(".urgente-caja", { keyframes: { rotation: [0, -8, 7, -5, 3, 0], scale: [1, 1.06, 1, 1.04, 1, 1] }, duration: .7, repeat: -1, repeatDelay: 1.8, ease: "none" });
+  gsap.from(".minijuego", { y: 40, rotation: (i) => (i % 2 ? 8 : -8), opacity: 0, duration: .55, stagger: .08, ease: "back.out(1.7)", scrollTrigger: { trigger: ".minijuegos", start: "top 80%" } });
+
   // Chapas: estampadas una a una.
   gsap.from(".chapas li", {
     scale: 1.8, opacity: 0, duration: .3, stagger: .1, ease: "power3.in",

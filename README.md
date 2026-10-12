@@ -17,13 +17,14 @@ anima con `gsap.from`, así que el estado de reposo es el final.
 - La cinta usa la misma banda que el juego y avanza al paso de las cajas. Las cajas
   son como en el juego: cartón, cinta teñida de su color y, algunas, el sello de goma
   de su contenido (`sello-*.webp`); lo especial va suelto con etiqueta (`objeto-*.webp`).
+- La gallina de la cinta salta al tocarla y a
+  la tercera pone un huevo que acaba en pollito. Sección del paquete urgente con
+  los seis minijuegos. En Halloween y Navidad (mismas fechas que el juego) la
+  portada usa el fondo de temporada; `?temporada=halloween` para probarlo.
 - Sección del álbum: pegatinas, cajas selladas, sobre del día, edición limitada y
   objetos perdidos. Si el juego cambia, revisar estos textos y el arte copiado de
   `apps/sites/chaos-couriers/assets/img/` del monorepo.
 - El sello se estampa al tocar la hoja (con el sonido del juego).
-- **Demo jugable**: mochila de 4×4 y tres cajas. Se arrastran o se tocan (caja y
-  luego casilla, que vale también con teclado). Fila o columna llena → se entregan
-  enteras las cajas que la tocan. A las 3 entregas sale el botón de jugar.
 - La entrada del logo, las notas, los polaroids y el final se animan al hacer scroll.
 - `og.png` (1200×630) es la imagen al compartir el enlace.
 
