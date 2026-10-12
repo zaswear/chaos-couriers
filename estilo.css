@@ -108,6 +108,12 @@ main > section.portada {
   max-width: 56ch; margin: 0 0 28px; padding: 16px 20px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 6px;
   box-shadow: 0 4px 0 color-mix(in srgb, var(--tinta) 30%, transparent);
 }
+/* El botón de itch.io y la insignia oficial de Google Play, a la misma altura. */
+.ctas { display: flex; flex-wrap: wrap; gap: 14px 18px; justify-content: center; align-items: center; }
+.google-play { display: block; border-radius: 10px; transition: translate .12s ease-out, filter .12s; }
+.google-play-insignia { height: 56px; width: auto; filter: drop-shadow(0 5px 0 color-mix(in srgb, var(--tinta) 45%, transparent)); }
+.google-play:active { translate: 0 3px; }
+@media (hover: hover) { .google-play:hover { filter: brightness(1.15); } }
 .detalle { margin: 18px 0 0; padding: 2px 10px; font: 14px var(--maquina); color: var(--papel); background: color-mix(in srgb, var(--tinta) 75%, transparent); }
 
 /* Escaparate: la cinta del juego con cajas pasando */

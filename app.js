@@ -4,7 +4,8 @@ const TEXTOS = {
     "cta.corto": "Jugar gratis", "cta.largo": "Jugar gratis en itch.io",
     lema: "Si cabe, se entrega. Si no cabe, también.",
     entradilla: "Eres el repartidor nuevo. Los paquetes llegan por la cinta y tú los metes en la mochila antes de que se caigan. Ninguno es normal.",
-    detalle: "En el navegador · móvil y escritorio · sin descargas",
+    detalle: "Gratis en el navegador y en Android · sin anuncios",
+    "pie.marca": "Google Play y el logotipo de Google Play son marcas de Google LLC.",
     "cinta.titulo": "Hoy en la cinta",
     "cinta.pie": "Cajas de cartón con su cinta de color y el sello de lo que llevan… y objetos extraviados sueltos: gallinas, helados, globos.",
     "demo.titulo": "Haz tu primera entrega",
@@ -44,7 +45,8 @@ const TEXTOS = {
     "cta.corto": "Play free", "cta.largo": "Play free on itch.io",
     lema: "If it fits, it ships. If it doesn't fit, it ships too.",
     entradilla: "You're the new courier. Parcels arrive on the conveyor belt and you pack them into your backpack before they fall off. None of them is normal.",
-    detalle: "In your browser · mobile and desktop · no download",
+    detalle: "Free in your browser and on Android · no ads",
+    "pie.marca": "Google Play and the Google Play logo are trademarks of Google LLC.",
     "cinta.titulo": "On the belt today",
     "cinta.pie": "Cardboard boxes with coloured tape and a stamp of what's inside… plus loose lost items: hens, ice creams, balloons.",
     "demo.titulo": "Make your first delivery",
@@ -103,6 +105,10 @@ function aplicarIdioma(l) {
   $("logo").alt = l === "es" ? "Mensajería del Caos" : "Chaos Couriers";
   $("capEscritorio").src = `assets/img/captura-escritorio-${l}.webp`;
   $("capMovil").src = `assets/img/captura-movil-${l}.webp`;
+  document.querySelectorAll(".google-play-insignia").forEach((img) => {
+    img.src = `assets/img/google-play-${l}.webp`;
+    img.alt = l === "es" ? "Disponible en Google Play" : "Get it on Google Play";
+  });
   document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === l));
   if (sellos) $("cuenta").textContent = t["sello.cuenta"](sellos);
   refrescos.forEach((f) => f());
@@ -432,7 +438,7 @@ if (animar) {
     .fromTo(escena, { y: 8 }, { y: 0, duration: .5, ease: "elastic.out(1.2, .25)" })
     .from(".lema", { y: 30, opacity: 0, duration: .4, ease: "back.out(2)" }, "-=.35")
     .from(".entradilla", { y: 30, opacity: 0, rotation: -3, duration: .45, ease: "back.out(1.6)" }, "-=.25")
-    .from(".portada .boton-sello", { scale: 0, rotation: -20, duration: .5, ease: "back.out(2.4)" }, "-=.2")
+    .from(".portada .ctas > *", { scale: 0, rotation: -20, duration: .5, stagger: .1, ease: "back.out(2.4)" }, "-=.2")
     .from(".detalle", { opacity: 0, duration: .4 }, "-=.2");
 
   // Parallax con el ratón: personajes y logo a distinta profundidad.

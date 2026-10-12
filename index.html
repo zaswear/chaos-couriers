@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Mensajería del Caos · Chaos Couriers</title>
-  <meta name="description" content="Puzle de paquetes para el navegador: mete en la mochila lo que llega por la cinta, entrega filas y sobrevive a gallinas, helados y a Doña Prisas. Gratis en itch.io.">
+  <meta name="description" content="Puzle de paquetes para el navegador: mete en la mochila lo que llega por la cinta, entrega filas y sobrevive a gallinas, helados y a Doña Prisas. Gratis en itch.io y Google Play.">
   <meta name="author" content="zaswear">
   <meta name="theme-color" content="#7A5536">
   <link rel="canonical" href="https://zaswear.github.io/chaos-couriers/">
@@ -22,12 +22,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Special+Elite&family=Nunito:wght@500;700;900&display=swap">
-  <link rel="stylesheet" href="estilo.css?v=f441f265">
+  <link rel="stylesheet" href="estilo.css?v=d1789554">
   <!-- Copiadas en el repo (no CDN): la página sigue sin cargar nada de terceros salvo las fuentes. -->
   <script src="js/vendor/gsap.min.js" defer></script>
   <script src="js/vendor/ScrollTrigger.min.js" defer></script>
   <script src="js/vendor/confetti.browser.js" defer></script>
-  <script src="app.js?v=f441f265" defer></script>
+  <script src="app.js?v=d1789554" defer></script>
 </head>
 <body>
   <header class="barra">
@@ -48,8 +48,11 @@
       </div>
       <p class="lema" data-t="lema">Si cabe, se entrega. Si no cabe, también.</p>
       <p class="entradilla" data-t="entradilla">Eres el repartidor nuevo. Los paquetes llegan por la cinta y tú los metes en la mochila antes de que se caigan. Ninguno es normal.</p>
-      <a class="boton-sello" href="https://zaswear.itch.io/chaos-couriers" data-t="cta.largo">Jugar gratis en itch.io</a>
-      <p class="detalle" data-t="detalle">En el navegador · móvil y escritorio · sin descargas</p>
+      <div class="ctas">
+        <a class="boton-sello" href="https://zaswear.itch.io/chaos-couriers" data-t="cta.largo">Jugar gratis en itch.io</a>
+        <a class="google-play" href="https://play.google.com/store/apps/details?id=com.zaswear.chaoscouriers"><img class="google-play-insignia" src="assets/img/google-play-es.webp" width="600" height="178" alt="Disponible en Google Play"></a>
+      </div>
+      <p class="detalle" data-t="detalle">Gratis en el navegador y en Android · sin anuncios</p>
     </section>
 
     <!-- La cinta: pegatinas del juego pasando sin parar. -->
@@ -159,12 +162,16 @@
         <img class="final-taza" src="assets/img/taza-nerviosa.webp" alt="" width="256" height="256" loading="lazy">
       </div>
       <p class="final-texto" data-t="final">Doña Prisas te espera en la oficina. Llega puntual.</p>
-      <a class="boton-sello" href="https://zaswear.itch.io/chaos-couriers" data-t="cta.largo">Jugar gratis en itch.io</a>
+      <div class="ctas">
+        <a class="boton-sello" href="https://zaswear.itch.io/chaos-couriers" data-t="cta.largo">Jugar gratis en itch.io</a>
+        <a class="google-play" href="https://play.google.com/store/apps/details?id=com.zaswear.chaoscouriers"><img class="google-play-insignia" src="assets/img/google-play-es.webp" width="600" height="178" alt="Disponible en Google Play"></a>
+      </div>
     </section>
   </main>
 
   <footer class="pie-pagina">
-    <p>© 2026 zaswear · <a href="https://zaswear.itch.io/chaos-couriers">itch.io</a> · <a href="privacidad.html" data-t="pie.privacidadEnlace">Privacidad</a></p>
+    <p>© 2026 zaswear · <a href="https://zaswear.itch.io/chaos-couriers">itch.io</a> · <a href="https://play.google.com/store/apps/details?id=com.zaswear.chaoscouriers">Google Play</a> · <a href="privacidad.html" data-t="pie.privacidadEnlace">Privacidad</a></p>
+    <p data-t="pie.marca">Google Play y el logotipo de Google Play son marcas de Google LLC.</p>
     <p data-t="pie.ia">Ilustraciones y sonidos creados con ayuda de herramientas de IA.</p>
     <p data-t="pie.privacidad">Esta página no usa cookies ni analítica; solo carga fuentes de Google Fonts.</p>
   </footer>
