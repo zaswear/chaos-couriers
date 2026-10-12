@@ -29,10 +29,10 @@ anima con `gsap.from`, así que el estado de reposo es el final.
 
 Para probarla en local: `python3 -m http.server` en esta carpeta.
 
-**Al cambiar `estilo.css` o `app.js`, sube su `?v=` en `index.html` y `privacidad.html`**
+**Al cambiar `estilo.css` o `app.js`, sube su `?v=` en `index.html`**
 (los 8 primeros caracteres de `cat estilo.css app.js | sha256sum`). GitHub Pages deja
 cachearlos 10 minutos y, sin versión, el navegador mezcla HTML nuevo con CSS viejo: la
-página de privacidad salió sin estilos por eso.
+página de privacidad salió sin estilos por eso (ahora lleva los suyos en línea).
 
 ## Derechos
 

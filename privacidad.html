@@ -13,7 +13,34 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Special+Elite&family=Nunito:wght@500;700;900&display=swap">
-  <link rel="stylesheet" href="estilo.css?v=e5a0fcb2">
+  <!-- Estilos propios y en línea: es una página para leer, sin el corcho de la landing,
+       y no depende de que el navegador tenga al día estilo.css. -->
+  <style>
+    :root { --papel: #FFF6E5; --papel-blanco: #FFFDF8; --tinta: #2B1D14; --tinta-suave: #5E4A3B; --sello: #D7263D; --sello-oscuro: #8E1022; --azul: #1F5FAE; --madera: #6E4B2F; }
+    * { box-sizing: border-box; }
+    html { background: var(--papel); }
+    body { margin: 0; background: var(--papel); color: var(--tinta); font: 500 17px/1.65 "Nunito", "Segoe UI", system-ui, sans-serif; }
+    a { color: var(--azul); }
+    :focus-visible { outline: 3px solid #FFC93C; outline-offset: 3px; }
+    .barra { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 10px; padding: 8px max(16px, calc((100% - 760px) / 2)); background: var(--madera); border-bottom: 3px solid var(--tinta); }
+    .marca img { display: block; width: 110px; height: auto; }
+    .idiomas { margin-left: auto; display: flex; gap: 4px; }
+    .idiomas a, .volver { min-width: 44px; min-height: 40px; display: grid; place-items: center; padding: 0 12px; border: 2px solid var(--tinta); border-radius: 8px; background: var(--papel); color: var(--tinta); font: 400 15px "Lilita One", sans-serif; text-decoration: none; }
+    .volver { background: var(--sello); border-color: var(--sello-oscuro); color: var(--papel); }
+    main { width: min(760px, 100% - 32px); margin: 0 auto; padding: 32px 0 48px; }
+    article { scroll-margin-top: 76px; padding: 8px 0 40px; }
+    article + article { border-top: 2px dashed #CDB894; padding-top: 40px; }
+    h1 { margin: 0 0 4px; font: 400 clamp(30px, 6vw, 42px)/1.1 "Lilita One", sans-serif; }
+    h2 { margin: 32px 0 8px; font: 400 23px/1.25 "Lilita One", sans-serif; }
+    p, li { max-width: 68ch; }
+    ul { padding-left: 1.2em; }
+    li { margin: 4px 0; }
+    code { font-size: .9em; overflow-wrap: anywhere; }
+    .legal-meta { margin: 0 0 20px; font: 14px "Special Elite", "Courier New", monospace; color: var(--tinta-suave); }
+    .legal-resumen { padding: 14px 18px; background: var(--papel-blanco); border: 2px solid var(--tinta); border-radius: 8px; box-shadow: 0 4px 0 #2B1D1433; }
+    footer { padding: 24px 16px 36px; text-align: center; background: var(--madera); color: var(--papel); font: 14px "Special Elite", "Courier New", monospace; }
+    footer a { color: var(--papel); }
+  </style>
 </head>
 <body>
   <header class="barra">
@@ -22,12 +49,12 @@
       <a href="#es" lang="es">ES</a>
       <a href="#en" lang="en">EN</a>
     </nav>
-    <a class="boton-sello pequeno" href="./">Volver</a>
+    <a class="volver" href="./">Volver</a>
   </header>
 
   <!-- Página fija, sin JS: es la URL que se da a Google Play y a itch.io. Si el juego
        empieza a enviar algo (anuncios, analítica, cuentas), hay que cambiar esto antes. -->
-  <main class="legal">
+  <main>
     <article class="legal-hoja" id="es" lang="es">
       <h1>Política de privacidad</h1>
       <p class="legal-meta">Mensajería del Caos · web y app de Android · actualizada el 12 de octubre de 2026</p>
@@ -141,7 +168,7 @@
     </article>
   </main>
 
-  <footer class="pie-pagina">
+  <footer>
     <p>© 2026 zaswear · <a href="./">Mensajería del Caos</a> · <a href="https://zaswear.itch.io/chaos-couriers">itch.io</a></p>
   </footer>
 </body>
